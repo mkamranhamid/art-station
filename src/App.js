@@ -18,6 +18,9 @@ function App() {
         >
           Learn React
         </a>
+        <small>You are running this application in <b>{process.env.NODE_ENV}</b> mode.</small>
+        {process.env.REACT_APP_FIREBAE_API_KEY}
+        {process.env.FIREBAE_STORAGE_BUCKET}
       </header>
     </div>
   );
