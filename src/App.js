@@ -1,8 +1,17 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import { database, auth } from "./config/firebase";
 
 function App() {
+
+  useEffect(() => {
+    /* auth.createUserWithEmailAndPassword('mkamranhamid@gmail.com', '123456').catch(function (error) {
+      var errorCode = error.code;
+      var errorMessage = error.message;
+    }); */
+  }, [])
+
   return (
     <div className="App">
       <header className="App-header">
@@ -20,7 +29,7 @@ function App() {
         </a>
         <small>You are running this application in <b>{process.env.NODE_ENV}</b> mode.</small>
         {process.env.REACT_APP_FIREBAE_API_KEY}
-        {process.env.FIREBAE_STORAGE_BUCKET}
+        {JSON.stringify(process.env)}
       </header>
     </div>
   );
