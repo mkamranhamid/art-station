@@ -3,6 +3,7 @@ import { Provider } from 'mobx-react';
 import logo from './logo.svg';
 import './App.css';
 import { database, auth } from "./config/firebase";
+import { UserStore } from "./stores/user";
 
 function App() {
 
