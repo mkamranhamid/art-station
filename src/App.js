@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { Provider } from 'mobx-react';
 import logo from './logo.svg';
 import './App.css';
 import { database, auth } from "./config/firebase";
