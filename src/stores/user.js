@@ -1,31 +1,25 @@
-import { observable, action } from 'mobx';
-import agent from '../agent';
+import { observable, action, decorate } from "mobx";
+import { createContext } from "react";
 
 class UserStore {
-
-    @observable currentUser;
-    @observable loadingUser;
-    @observable updatingUser;
-    @observable updatingUserErrors;
-
-    @action pullUser() {
-        this.loadingUser = true;
-        return agent.Auth.current()
-            .then(action(({ user }) => { this.currentUser = user; }))
-            .finally(action(() => { this.loadingUser = false; }))
+    rootState;
+    counter = 1;
+    constructor(rootState) {
+        this.rootState = rootState;
     }
-
-    @action updateUser(newUser) {
-        this.updatingUser = true;
-        return agent.Auth.save(newUser)
-            .then(action(({ user }) => { this.currentUser = user; }))
-            .finally(action(() => { this.updatingUser = false; }))
+    addCount(counter) {
+        this.counter++;
     }
-
-    @action forgetUser() {
-        this.currentUser = undefined;
+    subCount(counter) {
+        this.counter--;
     }
-
 }
 
-export default new UserStore();
+UserStore = decorate(UserStore, {
+    counter: observable,
+    setContacts: action,
+});
+
+export { UserStore }
+
+// export const UserStoreContext = createContext(new UserStore());
