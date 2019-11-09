@@ -1,0 +1,13 @@
+.signup-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 82%;
+    p, label {
+        color:#6c757d;
+    }
+    #dropdown-basic {
+        width: 100%;
+        border: 1px solid #6c757d;
+    }
+}
