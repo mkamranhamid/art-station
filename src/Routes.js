@@ -14,7 +14,7 @@ function Routes() {
   );
 }
 
-function PrivateRoute({ }) {
+function PrivateRoute() {
   return (
     <div>
       <Redirect from="/" to="/home" />
@@ -23,7 +23,7 @@ function PrivateRoute({ }) {
   );
 }
 
-function PublicRoutes({ }) {
+function PublicRoutes() {
   return (
     <div>
       <Redirect from="/" to="/auth" />

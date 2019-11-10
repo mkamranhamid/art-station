@@ -4,6 +4,11 @@
     border-color: #ff6162;
 }
 
+.btn:hover {
+    color: #fff;
+    text-decoration: none;
+}
+
 a {
     text-decoration: inherit;
     cursor: pointer;
@@ -13,5 +18,8 @@ a {
 
 a:hover, a:focus {
     color: #ff6162;
-    
+}
+
+p, h1 {
+    margin: 0;
 }

@@ -11,14 +11,21 @@
         img {
             height: 100vh; 
             align-self: center;
+            @media #{$phone} {
+                height: 60vh; 
+            }
         }
     }
     .right {
-        p a {
+        p:first-child a {
             font-weight: bold;
         }
-        p {
+        p:first-child {
             color: #6c757d;
+            text-align: right;
+            @media #{$phone} {
+                text-align: center;
+            }
         }
     }
 }
