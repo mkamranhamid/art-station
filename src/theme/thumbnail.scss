@@ -3,6 +3,9 @@
     height: auto;
     background: #ededed;
     position: relative;
+    display: inline-block;
+    margin: 5px;
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,0.2);
     .thumbnail-img {
         padding: 10px;
         img {
@@ -12,14 +15,45 @@
     }
     .thumbnail-info {
         position: absolute;
-        background: #ededed;
-        padding: 5px;
+        background: #fff;
+        padding-left: 14px;
         width: 100%;
         bottom: 0;
         transition: top 5s ease;
+        padding-right: 14px;
         visibility: hidden;
+        opacity: 0;
+        transition: visibility 0s, opacity .8s ease-out;
+        .infos {
+            font-size: $font-small;
+            display: inline-block;
+            float: left;
+            .info-name {
+                font-weight: bold;
+            }
+            .info-published-date {
+                color: $color-gray;
+            }
+        }
+        .info-actions {
+            display: inline-block;
+            float: right;
+            button {
+                background: transparent;
+                border: 1px solid;
+                &:nth-child(1){
+                    margin: 5px 8px;
+                    color: $color-red;
+                }
+                &:nth-child(2){
+                    color: $color-gray;
+                }
+            }
+            
+        }
     }
     &:hover .thumbnail-info {
         visibility: visible;
+        opacity: 1;
     }
 }

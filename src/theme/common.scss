@@ -1,8 +1,8 @@
 
 .btn-mkh {
     color: #fff;
-    background-color: #ff6162;
-    border-color: #ff6162;
+    background-color: $color-red;
+    border-color: $color-red;
 }
 
 .btn:hover {
@@ -14,11 +14,11 @@ a {
     text-decoration: inherit;
     cursor: pointer;
     outline: 0;
-    color: #ff6162;
+    color: $color-red;
 }
 
 a:hover, a:focus {
-    color: #ff6162;
+    color: $color-red;
 }
 
 p, h1 {

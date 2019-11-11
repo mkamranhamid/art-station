@@ -1,8 +1,10 @@
-$color-red: #FF0000;
-$color-green: #00FF00;
-$color-blue: #0000FF;
+$color-gray: #6c757d;
+$color-red: #ff6162;
+$color-gray-bg: #ededed;
 
 
 $tablet: "(min-width: 768px) and (max-width: 1023px) and (orientation: landscape)";
 $phone: "(min-width: 320px) and (max-width: 767px)";
 $desktop: "(min-width: 1024px)";
+
+$font-small: 13px
