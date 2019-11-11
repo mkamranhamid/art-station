@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function Signin({ }) {
+function Signin({ onSuccess }) {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -8,6 +8,7 @@ function Signin({ }) {
     const formSubmit = (event) => {
         event.preventDefault();
         console.log({ email, password });
+        onSuccess();
     }
 
     return (

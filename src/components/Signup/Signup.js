@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Dropdown } from 'react-bootstrap';
 
-function Signup({ }) {
+function Signup({ onSuccess }) {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -17,6 +17,7 @@ function Signup({ }) {
     const formSubmit = (event) => {
         event.preventDefault();
         console.log({ email, password, name, username, role });
+        onSuccess();
     }
 
     return (

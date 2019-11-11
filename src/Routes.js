@@ -1,6 +1,8 @@
 import React from 'react';
 import { BrowserRouter, Route, Redirect, Switch } from "react-router-dom";
 
+import { getToken } from './utils/common';
+
 import { AuthPage } from './pages/Auth';
 import { HomePage } from './pages/Home';
 
@@ -8,7 +10,7 @@ function Routes() {
   return (
     <BrowserRouter>
       <Switch>
-        <Route path="/home" component={HomePage} />
+        {/* <Route path="/home" component={HomePage} /> */}
         <AuthLogic />
       </Switch>
     </BrowserRouter>
@@ -35,7 +37,7 @@ function PublicRoutes() {
 }
 
 function AuthLogic({ }) {
-  const isLoggedIn = localStorage.getItem('@gql:token') ? true : false;
+  const isLoggedIn = getToken() ? true : false;
   return (
     isLoggedIn ? <PrivateRoute /> : <PublicRoutes />
   );

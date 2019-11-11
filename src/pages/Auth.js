@@ -3,6 +3,8 @@ import { observer } from 'mobx-react-lite';
 
 import { RootStoreContext } from '../stores/rootStore';
 
+import { setToken } from '../utils/common';
+
 import { Signup } from '../components/Signup';
 import { Signin } from '../components/Signin';
 
@@ -16,6 +18,12 @@ const AuthPage = observer((props) => {
         event.preventDefault();
         setView(viewTo);
     }
+
+    const routeTo = (route) => {
+        setToken('token:secret');
+        props.history.replace('home');
+    }
+
     return (
         <div className="auth-container row m-0">
             <div className="col-sm-12 col-md-6 col-lg-6 left p-0">
@@ -26,11 +34,11 @@ const AuthPage = observer((props) => {
                     view == 'signin' ?
                         <>
                             <p className="p-3">don't have an account? <a href={'false'} onClick={(event) => changeView(event, 'signup')}>sign up</a> </p>
-                            <Signin />
+                            <Signin onSuccess={() => routeTo('home')} />
                         </>
                         : <>
                             <p className="p-3">already have an account? <a href={'false'} onClick={(event) => changeView(event, 'signin')}>sign in</a> </p>
-                            <Signup />
+                            <Signup onSuccess={() => routeTo('home')} />
                         </>
                 }
             </div>
