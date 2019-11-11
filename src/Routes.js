@@ -8,6 +8,7 @@ function Routes() {
   return (
     <BrowserRouter>
       <Switch>
+        <Route path="/home" component={HomePage} />
         <AuthLogic />
       </Switch>
     </BrowserRouter>
@@ -28,6 +29,7 @@ function PublicRoutes() {
     <div>
       <Redirect from="/" to="/auth" />
       <Route path="/auth" component={AuthPage} />
+      <Route path="/home" component={HomePage} />
     </div>
   );
 }

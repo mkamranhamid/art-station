@@ -1,0 +1,25 @@
+.thumbnail {
+    width: 300px;
+    height: auto;
+    background: #ededed;
+    position: relative;
+    .thumbnail-img {
+        padding: 10px;
+        img {
+            width: 100%;
+    
+        }
+    }
+    .thumbnail-info {
+        position: absolute;
+        background: #ededed;
+        padding: 5px;
+        width: 100%;
+        bottom: 0;
+        transition: top 5s ease;
+        visibility: hidden;
+    }
+    &:hover .thumbnail-info {
+        visibility: visible;
+    }
+}
