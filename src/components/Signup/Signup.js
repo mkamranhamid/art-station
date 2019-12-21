@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Dropdown } from 'react-bootstrap';
 
-function Signup({ onSuccess }) {
+function Signup({ onSuccess, error, loading }) {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -17,7 +17,7 @@ function Signup({ onSuccess }) {
     const formSubmit = (event) => {
         event.preventDefault();
         console.log({ email, password, name, username, role });
-        onSuccess();
+        onSuccess({ email, password, name, username, role });
     }
 
     return (
@@ -94,8 +94,11 @@ function Signup({ onSuccess }) {
                             </Dropdown.Menu>
                         </Dropdown>
                     </div>
+                    {error && (<div className="alert alert-danger" role="alert">
+                        {error.message}
+                    </div>)}
                     <div className="pt-2">
-                        <button type="submit" className="btn btn-mkh w-100">Submit</button>
+                        <button type="submit" disabled={loading} className="btn btn-mkh w-100">Submit</button>
                     </div>
                 </form >
             </div>

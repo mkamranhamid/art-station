@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function Signin({ onSuccess }) {
+function Signin({ onSuccess, error, loading }) {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -8,7 +8,7 @@ function Signin({ onSuccess }) {
     const formSubmit = (event) => {
         event.preventDefault();
         console.log({ email, password });
-        onSuccess();
+        onSuccess({ email, password });
     }
 
     return (
@@ -40,8 +40,11 @@ function Signin({ onSuccess }) {
                             onChange={({ target }) => setPassword(target.value)}
                         />
                     </div>
+                    {error && (<div className="alert alert-danger" role="alert">
+                        {error.message}
+                    </div>)}
                     <div className="pt-2">
-                        <button type="submit" className="btn btn-mkh w-100">Submit</button>
+                        <button type="submit" disabled={loading} className="btn btn-mkh w-100">Submit</button>
                     </div>
                 </form >
             </div>
