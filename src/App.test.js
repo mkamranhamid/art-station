@@ -1,9 +1,24 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './App';
+import { Router } from 'react-router-dom'
+import { render, fireEvent } from '@testing-library/react'
+import '@testing-library/jest-dom/extend-expect'
 
-it('renders without crashing', () => {
-  const div = document.createElement('div');
-  ReactDOM.render(<App />, div);
-  ReactDOM.unmountComponentAtNode(div);
-});
+import { Routes } from "./Routes";
+
+describe("App", () => {
+  let component;
+  beforeEach(() => {
+    component = render(
+      <Routes />
+    )
+  })
+  it('render routes without crashing', () => {
+    const { container, getByText, getByTestId } = component;
+    expect(container.innerHTML).toMatch('Sign in')
+  });
+  it('render routes without crashing', () => {
+    const { container, getByText, getByTestId } = component;
+    expect(getByTestId(/a-signup/i).closest('a')).toBeDefined()
+    expect(container.innerHTML).toMatch('Sign in')
+  });
+})

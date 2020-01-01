@@ -7,7 +7,7 @@ function Signin({ onSuccess, error, loading }) {
 
     const formSubmit = (event) => {
         event.preventDefault();
-        console.log({ email, password });
+        const { email, password } = event.target.elements
         onSuccess({ email, password });
     }
 
@@ -18,23 +18,28 @@ function Signin({ onSuccess, error, loading }) {
                 <p>Lorem ipsum dolar sit lorem ipsum dolar sit </p>
                 <form onSubmit={formSubmit}>
                     <div className="form-group">
-                        <label htmlFor="register-email">Email address</label>
+                        <label htmlFor="login-email">Email address</label>
                         <input
+                            data-testid="email"
                             type="email"
+                            name="email"
                             className="form-control"
-                            id="register-email"
-                            aria-describedby="emailHelp"
+                            id="login-email"
+                            aria-describedby="email"
                             placeholder="Enter email"
                             value={email}
                             onChange={({ target }) => setEmail(target.value)}
                         />
                     </div>
                     <div className="form-group">
-                        <label htmlFor="register-pwd">Password</label>
+                        <label htmlFor="login-pwd">Password</label>
                         <input
+                            data-testid="password"
                             type="password"
+                            name="password"
                             className="form-control"
-                            id="register-pwd"
+                            id="login-pwd"
+                            aria-describedby="password"
                             placeholder="Password"
                             value={password}
                             onChange={({ target }) => setPassword(target.value)}
@@ -44,7 +49,7 @@ function Signin({ onSuccess, error, loading }) {
                         {error.message}
                     </div>)}
                     <div className="pt-2">
-                        <button type="submit" disabled={loading} className="btn btn-mkh w-100">Submit</button>
+                        <button data-testid="submit" type="submit" disabled={loading} className="btn btn-mkh w-100">Submit</button>
                     </div>
                 </form >
             </div>

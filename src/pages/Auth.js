@@ -61,11 +61,11 @@ const AuthPage = observer((props) => {
                 {
                     view == 'signin' ?
                         <>
-                            <p className="p-3">don't have an account? <a href={'false'} onClick={(event) => changeView(event, 'signup')}>sign up</a> </p>
+                            <p className="p-3">don't have an account? <a data-testid="a-signup" href={'false'} onClick={(event) => changeView(event, 'signup')}>sign up</a> </p>
                             <Signin onSuccess={onSignin} error={error} loading={loading} />
                         </>
                         : <>
-                            <p className="p-3">already have an account? <a href={'false'} onClick={(event) => changeView(event, 'signin')}>sign in</a> </p>
+                            <p className="p-3">already have an account? <a data-testid="a-signin" href={'false'} onClick={(event) => changeView(event, 'signin')}>sign in</a> </p>
                             <Signup onSuccess={onSignup} error={error} loading={loading} />
                         </>
                 }
