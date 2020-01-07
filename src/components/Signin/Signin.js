@@ -7,7 +7,6 @@ function Signin({ onSuccess, error, loading }) {
 
     const formSubmit = (event) => {
         event.preventDefault();
-        console.log({ email, password });
         onSuccess({ email, password });
     }
 
@@ -18,26 +17,29 @@ function Signin({ onSuccess, error, loading }) {
                 <p>Lorem ipsum dolar sit lorem ipsum dolar sit </p>
                 <form onSubmit={formSubmit}>
                     <div className="form-group">
-                        <label htmlFor="register-email">Email address</label>
+                        <label htmlFor="login-email">Email address</label>
                         <input
                             type="email"
                             className="form-control"
-                            id="register-email"
-                            aria-describedby="emailHelp"
+                            id="login-email"
+                            aria-describedby="email"
                             placeholder="Enter email"
                             value={email}
                             onChange={({ target }) => setEmail(target.value)}
+                            required
                         />
                     </div>
                     <div className="form-group">
-                        <label htmlFor="register-pwd">Password</label>
+                        <label htmlFor="login-pwd">Password</label>
                         <input
                             type="password"
                             className="form-control"
-                            id="register-pwd"
+                            id="login-pwd"
+                            aria-describedby="password"
                             placeholder="Password"
                             value={password}
                             onChange={({ target }) => setPassword(target.value)}
+                            required
                         />
                     </div>
                     {error && (<div className="alert alert-danger" role="alert">

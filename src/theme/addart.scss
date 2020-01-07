@@ -1,0 +1,22 @@
+.addart-container {
+    .choose_file{
+        position:relative;
+        display:inline-block;    
+        border-radius:8px;
+        border:#ebebeb solid 1px;
+        width:250px; 
+        padding: 4px 6px 4px 8px;
+        font: normal 14px Myriad Pro, Verdana, Geneva, sans-serif;
+        color: #7f7f7f;
+        margin-top: 2px;
+        background:white
+        
+    }
+    input[type="file"]{
+        -webkit-appearance:none; 
+        position:absolute;
+        top:0; left:0;
+        opacity:0; 
+    }
+    
+}

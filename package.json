@@ -26,6 +26,7 @@
     "start:debug": "react-scripts --inspect start --no-cache --runInBand",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "test:cypress": "cypress open",
     "eject": "react-scripts eject",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
@@ -51,6 +52,7 @@
     "@storybook/addon-links": "^5.2.5",
     "@storybook/addons": "^5.2.5",
     "@storybook/react": "^5.2.5",
-    "babel-loader": "^8.0.6"
+    "babel-loader": "^8.0.6",
+    "cypress": "^3.8.1"
   }
 }

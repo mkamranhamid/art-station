@@ -3,8 +3,11 @@ import { BrowserRouter, Route, Redirect, Switch } from "react-router-dom";
 
 import { getToken } from './utils/common';
 
-import { AuthPage } from './pages/Auth';
-import { HomePage } from './pages/Home';
+import { Main } from './Main';
+import { AuthPage } from './containers/Auth';
+import { HomePage } from './containers/Home';
+import { AccountPage } from './containers/Account';
+import { AddArtPage } from './containers/AddArt';
 
 function Routes() {
   return (
@@ -20,8 +23,11 @@ function Routes() {
 function PrivateRoute() {
   return (
     <div>
-      <Redirect from="/" to="/home" />
+      {/* <Redirect from="/" to="/home" /> */}
+      <Route path="/" component={Main} />
       <Route path="/home" component={HomePage} />
+      <Route exact path="/account" component={AccountPage} />
+      <Route path="/account/add-art" component={AddArtPage} />
     </div>
   );
 }
@@ -30,6 +36,7 @@ function PublicRoutes() {
   return (
     <div>
       <Redirect from="/" to="/auth" />
+      <Route path="/" component={Main} />
       <Route path="/auth" component={AuthPage} />
       <Route path="/home" component={HomePage} />
     </div>

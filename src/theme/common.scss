@@ -4,6 +4,14 @@
     background-color: $color-red;
     border-color: $color-red;
 }
+.btn-outline-mkh {
+    color: $color-red;
+    border-color: $color-red;
+    &:hover {
+        background-color: $color-red;
+        border-color: $color-red;
+    }
+}
 
 .btn:hover {
     color: #fff;

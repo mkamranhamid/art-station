@@ -17,13 +17,12 @@ function addUser(user) {
     userRef.set(user);
 }
 
-async function getUser(uid) {
+export async function getUser(uid) {
     try {
         const user = await firestore.doc(`user/${uid}`).get();
         if (!user.exists) {
             throw new Error('Error: User dont exist in our database');
         }
-        console.log("user.data(): ", user.data());
         return user.data();
     } catch (err) {
         throw err;

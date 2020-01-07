@@ -3,8 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHeart, faSave } from '@fortawesome/free-solid-svg-icons'
 
 
-function Thumbnail({ data:{image, title, publishedAt} }) {
-    console.log({ image, title, publishedAt })
+function Thumbnail({ data: { image, title, publishedAt } }) {
     return (
         <div className="thumbnail">
             <div className="thumbnail-img">

@@ -55,7 +55,7 @@ function Signup({ onSuccess, error, loading }) {
                         <input
                             type="text"
                             className="form-control"
-                            id="name"
+                            id="register-name"
                             placeholder="Name"
                             value={name}
                             onChange={({ target }) => setName(target.value)}

@@ -3,6 +3,7 @@ import { observable, action, decorate } from "mobx";
 class AppStore {
     rootState;
     contacts = [];
+    loader = false;
     constructor(rootState) {
         this.rootState = rootState;
     }
@@ -13,6 +14,7 @@ class AppStore {
 
 AppStore = decorate(AppStore, {
     contacts: observable,
+    loader: observable,
     setContacts: action,
 });
 
