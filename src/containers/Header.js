@@ -14,15 +14,7 @@ const Header = observer(({ history }) => {
     const { userStore } = rootStoreContext;
 
     useEffect(() => {
-        const token = getToken()
-        getUser(token)
-            .then((user) => {
-                userStore.setUser(user)
-                setLoggedin(userStore.isLoggedin);
-            })
-            .catch((err) => {
-                console.log(err);
-            });
+        setLoggedin(userStore.isLoggedin)
     }, [userStore.isLoggedin])
 
     const handleRouteTo = (event, where) => {
@@ -30,7 +22,7 @@ const Header = observer(({ history }) => {
         if (where == "auth") {
             removeToken()
         }
-        history.replace(where);
+        history.push(where);
     }
 
     const doLogout = (ev) => {

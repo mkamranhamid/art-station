@@ -3,6 +3,7 @@ import { observer } from 'mobx-react-lite';
 
 import { RootStoreContext } from '../stores/rootStore';
 import { getUser } from '../utils/auth';
+import { fetchAllProducts } from '../utils/crud';
 
 import { getToken, removeToken } from '../utils/common';
 
@@ -11,8 +12,11 @@ import { Thumbnail } from '../components/Thumbnail';
 
 const HomePage = observer(({ history }) => {
 
+    const [products, setProducts] = useState(null)
+    const [items, setItems] = useState([])
     const rootStoreContext = useContext(RootStoreContext);
     const { userStore } = rootStoreContext;
+
     const data = [
         {
             image: `${process.env.PUBLIC_URL}/images/products/paint1.jpg`,
@@ -42,22 +46,26 @@ const HomePage = observer(({ history }) => {
     ]
 
     useEffect(() => {
-        /* const token = getToken()
-        getUser(token)
-            .then((user) => userStore.setUser(user))
-            .catch((err) => {
-                console.log(err);
-                removeToken();
-                history.replace('auth');
-            }); */
-        console.log("useEffect: ");
+        let mounted = true;
+        const thisSetProducts = setItems;
+         const productFetcher = async () => {
+            try {
+                const prod = await fetchAllProducts()
+                setProducts(prod)
+            } catch (err) {
+                console.log(err)
+            }
+        }
+        productFetcher() 
+        return () => {
+            mounted = false
+        }
     }, [])
 
-    console.log("userStore.user: ", userStore.user);
     return (
         <div>
             {
-                data.map((d, i) => (
+                products && products.map((d, i) => (
                     <Thumbnail data={d} key={i} />
                 ))
             }

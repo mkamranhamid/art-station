@@ -8,12 +8,6 @@ import { AccountView } from "../components/AccountView";
 
 const AccountPage = observer(({ history }) => {
 
-    const rootStoreContext = useContext(RootStoreContext);
-    const { userStore } = rootStoreContext;
-
-    useEffect(() => {
-    }, [])
-
     const handleRouteTo = (where) => {
         history.push(where);
     }

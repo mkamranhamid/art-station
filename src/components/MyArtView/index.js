@@ -1,0 +1,1 @@
+export { MyArtView } from "./MyArtView";

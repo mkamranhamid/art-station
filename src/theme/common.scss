@@ -4,12 +4,32 @@
     background-color: $color-red;
     border-color: $color-red;
 }
+.btn-mkh1 {
+    cursor: pointer;
+    border-radius: 4px;
+    padding: 6px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    background-color: $color-red;
+    border-color: $color-red;
+}
 .btn-outline-mkh {
     color: $color-red;
     border-color: $color-red;
     &:hover {
         background-color: $color-red;
         border-color: $color-red;
+    }
+}
+
+.dropdown {
+    .btn {
+        &:hover {
+            color: #000;
+            text-decoration: none;
+        }
     }
 }
 
@@ -32,3 +52,46 @@ a:hover, a:focus {
 p, h1 {
     margin: 0;
 }
+
+.vertical-horizontal-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.largeLoader {
+    display: inline-block;
+    border: 5px solid #f3f3f3;
+    -webkit-animation: spin 1s linear infinite;
+    animation: spin 1s linear infinite;
+    border-top: 5px solid #555;
+    border-radius: 50%;
+    border-width: 3px;
+    width: 50px;
+    height: 50px;
+    margin: 0 5px
+  }
+
+.smallLoader {
+    display: inline-block;
+    border: 5px solid #f3f3f3;
+    -webkit-animation: spin 1s linear infinite;
+    animation: spin 1s linear infinite;
+    border-top: 5px solid #555;
+    border-radius: 50%;
+    border-width: 3px;
+    width: 20px;
+    height: 20px;
+    margin: 0 5px
+  }
+  
+  /* Safari */
+  @-webkit-keyframes spin {
+    0% { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(360deg); }
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }

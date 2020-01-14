@@ -4,10 +4,14 @@ import { BrowserRouter, Route, Redirect, Switch } from "react-router-dom";
 import { getToken } from './utils/common';
 
 import { Main } from './Main';
+
 import { AuthPage } from './containers/Auth';
 import { HomePage } from './containers/Home';
 import { AccountPage } from './containers/Account';
 import { AddArtPage } from './containers/AddArt';
+import { EditArtPage } from './containers/EditArt';
+import { ProfilePage } from './containers/Profile';
+import { MyArtPage } from './containers/MyArt';
 
 function Routes() {
   return (
@@ -22,13 +26,16 @@ function Routes() {
 
 function PrivateRoute() {
   return (
-    <div>
+    <>
       {/* <Redirect from="/" to="/home" /> */}
       <Route path="/" component={Main} />
       <Route path="/home" component={HomePage} />
       <Route exact path="/account" component={AccountPage} />
       <Route path="/account/add-art" component={AddArtPage} />
-    </div>
+      <Route path="/account/edit-art/:id" component={EditArtPage} />
+      <Route path="/account/my-art" component={MyArtPage} />
+      <Route path="/account/profile" component={ProfilePage} />
+    </>
   );
 }
 

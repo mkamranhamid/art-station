@@ -1,13 +1,14 @@
 import React from 'react';
 import { Header } from "./containers/Header";
+import { AuthGuard } from './containers/AuthGuard';
 
 function Main({ children, ...props }) {
 
     return (
-        <div>
+        <AuthGuard {...props}>
             <Header {...props} />
             {children}
-        </div>
+        </AuthGuard>
     )
 }
 

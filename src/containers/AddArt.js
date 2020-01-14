@@ -14,17 +14,16 @@ const AddArtPage = observer(({ history }) => {
     const [error, setError] = useState(null);
     const [loading, setLoader] = useState(false);
 
-    useEffect(() => {
-        console.log("userStore.user: ", userStore.user)
-    }, [])
-
     const handleOnPress = async (data) => {
         try {
+            setLoader(true)
             console.log("handleOnPress: ", userStore.user.uid)
             const uploadedArt = await uploadArt(data, userStore.user.uid);
+            setLoader(false)
             history.push('/home')
         } catch (err) {
             console.log("ERRR: ", err)
+            setLoader(false)
         }
     }
 

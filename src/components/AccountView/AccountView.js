@@ -1,18 +1,18 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faHeart, faSave, faSignal, faUserAlt, faDumpster, faBoxOpen } from '@fortawesome/free-solid-svg-icons'
+import { faHeart, faSave, faSignal, faUserAlt, faDumpster, faBoxOpen, faPalette } from '@fortawesome/free-solid-svg-icons'
 
 function AccountView({ routeTo }) {
     const items = [
         {
-            icon: faSignal,
-            title: "Dashboard",
-            route: '/home'
+            icon: faPalette,
+            title: "My Art",
+            route: '/account/my-art'
         },
         {
             icon: faUserAlt,
             title: "Profile",
-            route: '/home'
+            route: '/account/profile'
         },
         {
             icon: faDumpster,
@@ -24,6 +24,12 @@ function AccountView({ routeTo }) {
             title: "Add Art",
             route: '/account/add-art'
         },
+        {
+            icon: faSignal,
+            title: "Dashboard",
+            route: '/home'
+        },
+
     ]
     return (
         <div className="container account-container">

@@ -17,6 +17,11 @@ function addUser(user) {
     userRef.set(user);
 }
 
+export function updateUser(user) {
+    let userRef = firestore.collection('user').doc(user.uid);
+    userRef.update(user);
+}
+
 export async function getUser(uid) {
     try {
         const user = await firestore.doc(`user/${uid}`).get();
