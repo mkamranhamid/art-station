@@ -5,6 +5,7 @@ export async function createUser(userCredentials) {
         const { email, password } = userCredentials;
         const { user: { uid } } = await auth.createUserWithEmailAndPassword(email, password);
         const newUser = { ...userCredentials, uid, status: "pending" };
+        delete newUser.password;
         addUser(newUser)
         return newUser;
     } catch (err) {

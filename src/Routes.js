@@ -12,6 +12,7 @@ import { AddArtPage } from './containers/AddArt';
 import { EditArtPage } from './containers/EditArt';
 import { ProfilePage } from './containers/Profile';
 import { MyArtPage } from './containers/MyArt';
+import { ArtDetailPage } from './containers/ArtDetail';
 
 function Routes() {
   return (
@@ -27,9 +28,10 @@ function Routes() {
 function PrivateRoute() {
   return (
     <>
-      {/* <Redirect from="/" to="/home" /> */}
+      <Redirect from="/" to="/home" />
       <Route path="/" component={Main} />
       <Route path="/home" component={HomePage} />
+      <Route path="/art/:id" component={ArtDetailPage} />
       <Route exact path="/account" component={AccountPage} />
       <Route path="/account/add-art" component={AddArtPage} />
       <Route path="/account/edit-art/:id" component={EditArtPage} />
@@ -41,12 +43,12 @@ function PrivateRoute() {
 
 function PublicRoutes() {
   return (
-    <div>
+    <>
       <Redirect from="/" to="/auth" />
       <Route path="/" component={Main} />
       <Route path="/auth" component={AuthPage} />
       <Route path="/home" component={HomePage} />
-    </div>
+    </>
   );
 }
 

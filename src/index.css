@@ -1,11 +1,16 @@
 @font-face {
   font-family: "Haas Grot Text R Web";
-  src: url(./fonts/NeueHaasGrotTextRound-55Roman-Web.eot);
-  src: url(./fonts/NeueHaasGrotTextRound-55Roman-Web.eot?#iefix) format("embedded-opentype"), 
-  url(./fonts/NeueHaasGrotTextRound-55Roman-Web.woff2) format("woff2"), 
-  url(./fonts/NeueHaasGrotTextRound-55Roman-Web.woff) format("woff");
+  src: url(./fonts/NeueHaasGrotText/NeueHaasGrotTextRound-55Roman-Web.eot);
+  src: url(./fonts/NeueHaasGrotText/NeueHaasGrotTextRound-55Roman-Web.eot?#iefix) format("embedded-opentype"), url(./fonts/NeueHaasGrotText/NeueHaasGrotTextRound-55Roman-Web.woff2) format("woff2"), url(./fonts/NeueHaasGrotText/NeueHaasGrotTextRound-55Roman-Web.woff) format("woff");
   font-weight: 400;
-  font-style: normal
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "EB Garamond";
+  src: url(./fonts/EB_Garamond/EBGaramond-VariableFont_wght.ttf);
+  font-weight: 400;
+  font-style: normal;
 }
 
 body {
@@ -13,6 +18,13 @@ body {
   font-family: "Haas Grot Text R Web", "Helvetica Neue", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "EB Garamond", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-transform: uppercase;
 }
 
 code {

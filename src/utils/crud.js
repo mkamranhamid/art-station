@@ -6,11 +6,11 @@ export async function uploadArt(artData, uid) {
     try {
         const uploaded = await uploadFile(artData.file);
         const url = await uploaded.ref.getDownloadURL();
+        delete artData.file;
         const productDetails = {
-            title: artData.title,
+            ...artData,
             image: url,
             publishedAt: getPublishedDate(),
-            price: artData.price,
             uid
         }
         await addProduct(productDetails)
@@ -60,7 +60,7 @@ export async function fetchAllProducts() {
         const productSnapshot = await productRef.get();
         let products = []
         productSnapshot.forEach(doc => {
-            products.push(doc.data());
+            products.push({ ...doc.data(), id: doc.id });
         });
         return products;
     } catch (err) {
@@ -89,6 +89,22 @@ export async function fetchProductById(id) {
             throw new Error('Error: Product dont exist in our database');
         }
         return product.data();
+    } catch (err) {
+        throw err;
+    }
+}
+
+export async function fetchProductDetailById(id) {
+    try {
+        const product = await firestore.doc(`products/${id}`).get();
+        if (!product.exists) {
+            throw new Error('Error: Product dont exist in our database');
+        }
+        const user = await firestore.doc(`user/${product.data().uid}`).get();
+        if (!user.exists) {
+            throw new Error('Error: User doesnt exist in our database');
+        }
+        return { ...product.data(), user: { ...user.data() } };
     } catch (err) {
         throw err;
     }

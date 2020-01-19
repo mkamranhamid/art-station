@@ -1,0 +1,1 @@
+export { ArtDetailView } from "./ArtDetailView";

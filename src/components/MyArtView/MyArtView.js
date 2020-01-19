@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Dropdown } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrash, faPen } from '@fortawesome/free-solid-svg-icons'
+import { Link } from "react-router-dom";
 
 function MyArtView({ products, onActionChange }) {
 
@@ -11,18 +12,11 @@ function MyArtView({ products, onActionChange }) {
         { id: 1, icon: faTrash, title: "Remove" },
     ]
 
-    const handleAction = (act) => {
-        if (act.title == "Edit") {
-            console.log("ACT EDIT: ", act)
-        } else {
-            console.log("ACT REMOVE: ", act)
-        }
+    if (!products.length) {
+        return <h6>No Art found :( Add your art from accoun/<Link to="/account/add-art">Add Art</Link></h6>
     }
-
     return (
         <div className="container">
-            {/* <h4>MY ART</h4> */}
-            {!products.length && <h6>No Art found :( Add your art</h6>}
             {
                 products.length && <table className="table table-responsive">
                     <thead>
@@ -44,7 +38,7 @@ function MyArtView({ products, onActionChange }) {
                                     <td>{product.publishedAt}</td>
                                     <td>
                                         <Dropdown>
-                                            <Dropdown.Toggle variant="" id="dropdown-basic">
+                                            <Dropdown.Toggle className="p-0" variant="" id="dropdown-basic">
                                                 {selectedAction}
                                             </Dropdown.Toggle>
                                             <Dropdown.Menu>
@@ -69,7 +63,6 @@ function MyArtView({ products, onActionChange }) {
                     </tbody>
                 </table>
             }
-
         </div>
     )
 }

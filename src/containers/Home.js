@@ -48,7 +48,7 @@ const HomePage = observer(({ history }) => {
     useEffect(() => {
         let mounted = true;
         const thisSetProducts = setItems;
-         const productFetcher = async () => {
+        const productFetcher = async () => {
             try {
                 const prod = await fetchAllProducts()
                 setProducts(prod)
@@ -56,19 +56,25 @@ const HomePage = observer(({ history }) => {
                 console.log(err)
             }
         }
-        productFetcher() 
+        productFetcher()
         return () => {
             mounted = false
         }
     }, [])
 
+    const handleThumbnailClick = (id) => {
+        history.push(`/art/${id}`);
+    }
+
     return (
-        <div>
-            {
-                products && products.map((d, i) => (
-                    <Thumbnail data={d} key={i} />
-                ))
-            }
+        <div className="container">
+            <div className="row">
+                {
+                    products && products.map((d, i) => (
+                        <Thumbnail data={d} key={i} onClick={handleThumbnailClick} />
+                    ))
+                }
+            </div>
         </div>
     )
 })

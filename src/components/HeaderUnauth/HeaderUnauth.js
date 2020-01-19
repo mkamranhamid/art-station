@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 function HeaderUnauth({ routeTo, state, logout }) {
 
     return (
-        <Navbar bg="light" expand="lg">
+        <Navbar expand="lg">
             <Navbar.Brand href="#home" onClick={(event) => routeTo(event, '/home')}>ART STATION</Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
