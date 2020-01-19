@@ -44,10 +44,11 @@ function PrivateRoute() {
 function PublicRoutes() {
   return (
     <>
-      <Redirect from="/" to="/auth" />
+      <Redirect from="/" to="/home" />
       <Route path="/" component={Main} />
-      <Route path="/auth" component={AuthPage} />
       <Route path="/home" component={HomePage} />
+      <Route path="/art/:id" component={ArtDetailPage} />
+      <Route path="/auth" component={AuthPage} />
     </>
   );
 }

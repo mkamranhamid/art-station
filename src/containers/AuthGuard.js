@@ -18,7 +18,7 @@ const AuthGuard = observer(({ history, children }) => {
         const token = getToken()
         if (!token) {
             setLoader(false)
-            history.push("/auth");
+            // history.push("/auth");
             return
         }
         getUser(token)
@@ -30,7 +30,7 @@ const AuthGuard = observer(({ history, children }) => {
             .catch((err) => {
                 console.log(err);
                 setLoader(false)
-                history.push("/auth");
+                // history.push("/auth");
             });
     }, [userStore.isLoggedin])
 
