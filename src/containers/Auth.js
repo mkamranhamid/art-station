@@ -82,9 +82,6 @@ const AuthPage = observer(({ history, match }) => {
                         </>
                 }
             </div>
-            {
-                loading && <Loader type="large" />
-            }
         </div>
     )
 })

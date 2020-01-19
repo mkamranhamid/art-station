@@ -21,6 +21,7 @@ function AddArtView({ onSubmit, error, loading, product }) {
             setHeading('Update')
             setTitle(product.title)
             setPrice(product.price)
+            setQuantity(product.quantity || 1)
             setDescription(product.description || '')
             setCategory(product.category || '')
         }
@@ -30,6 +31,7 @@ function AddArtView({ onSubmit, error, loading, product }) {
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [price, setPrice] = useState(1);
+    const [quantity, setQuantity] = useState(1);
     const [selectedCategory, setCategory] = useState('modernism');
     const [heading, setHeading] = useState("Add");
 
@@ -37,12 +39,12 @@ function AddArtView({ onSubmit, error, loading, product }) {
         event.preventDefault();
         let editMode = heading == 'Update';
         let [file] = fileInput.current.files
-        if ((!file && !editMode) || (!title || !description || !price || !selectedCategory)) {  // file in edit view is not compulsory
+        if ((!file && !editMode) || (!title || !description || !price || !selectedCategory || !quantity)) {  // file in edit view is not compulsory
             alert('Enter all fields')
             return
         }
         // const file = fileInput.current.files[0]
-        onSubmit({ title, description, file, price, category: selectedCategory });
+        onSubmit({ title, description, file, price, quantity, category: selectedCategory });
     }
 
     return (
@@ -87,6 +89,19 @@ function AddArtView({ onSubmit, error, loading, product }) {
                             placeholder="Enter price"
                             value={price}
                             onChange={({ target }) => setPrice(target.value)}
+                        />
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="addart-price">Quantity</label>
+                        <input
+                            type="number"
+                            required
+                            className="form-control"
+                            id="addart-quantity"
+                            aria-describedby="addArtQuantity"
+                            placeholder="Enter number of pieces of this arts"
+                            value={quantity}
+                            onChange={({ target }) => setQuantity(target.value)}
                         />
                     </div>
                     <div className="form-group">

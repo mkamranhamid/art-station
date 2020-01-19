@@ -10,12 +10,20 @@ import { HeaderUnauth } from '../components/HeaderUnauth';
 const Header = observer(({ history }) => {
 
     const [loggedin, setLoggedin] = useState(false)
+    const [cartsLength, setCartsLength] = useState(0)
     const rootStoreContext = useContext(RootStoreContext);
-    const { userStore } = rootStoreContext;
+    const { userStore, cartStore } = rootStoreContext;
 
     useEffect(() => {
         setLoggedin(userStore.isLoggedin)
     }, [userStore.isLoggedin])
+
+    /*
+        * to listen cart array 
+     */
+    useEffect(() => {
+        setCartsLength(cartStore.carts.length)
+    }, [cartStore.carts])
 
     const handleRouteTo = (event, where) => {
         event.preventDefault();
@@ -32,7 +40,7 @@ const Header = observer(({ history }) => {
     }
 
     return (
-        <HeaderUnauth routeTo={handleRouteTo} state={loggedin} logout={doLogout} />
+        <HeaderUnauth routeTo={handleRouteTo} state={loggedin} logout={doLogout} cart={cartsLength} />
     )
 })
 

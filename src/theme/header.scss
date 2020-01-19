@@ -45,6 +45,20 @@ nav {
       input::-webkit-input-placeholder {
         color: #999;
       }
+
+      .badge {
+        width: auto;
+        height: auto;
+        padding: 3px;
+        border-radius: 50%;
+        position: absolute;
+        background-color: #ededed;
+        top: -14px;
+        left: 12px;
+        font-size: 0.8em;
+        color: #363636;
+        border: 1px solid #d7d7d7;
+      }
 }
 
 #search-form {
