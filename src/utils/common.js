@@ -1,4 +1,5 @@
 import { TOKEN_KEY } from './constants';
+import { useLocation } from "react-router-dom";
 
 export function getLocalStorage(key) {
     return localStorage.getItem(key);
@@ -32,4 +33,8 @@ export function getPublishedDate() {
     return `${months[currMonth]} ${currDate}, ${currYear}`;
 
     return removeLocalStorage(TOKEN_KEY);
+}
+
+export function useQuery() {
+    return new URLSearchParams(useLocation().search);
 }

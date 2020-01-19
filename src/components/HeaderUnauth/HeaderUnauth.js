@@ -14,9 +14,9 @@ function HeaderUnauth({ routeTo, state, logout }) {
                 </form>
                 {!state && <Nav className="">
                     <li className="nav-item">
-                        <a className="nav-link" href="#" onClick={(event) => routeTo(event, '/auth')}>Sign in</a>
+                        <a className="nav-link" href="#" onClick={(event) => routeTo(event, '/auth?q=signin')}>Sign in</a>
                     </li>
-                    <button className="btn btn-outline-mkh" onClick={(event) => routeTo(event, '/auth')}>Sign up</button>
+                    <button className="btn btn-outline-mkh" onClick={(event) => routeTo(event, '/auth?q=signup')}>Sign up</button>
                 </Nav>}
                 {state && <Nav className="">
                     <li className="nav-item">

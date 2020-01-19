@@ -1,21 +1,32 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { observer } from 'mobx-react-lite';
+import { useLocation } from "react-router-dom";
 
 import { RootStoreContext } from '../stores/rootStore';
 
-import { setToken } from '../utils/common';
+import { setToken, useQuery } from '../utils/common';
 import { createUser, login } from '../utils/auth';
 
 import { Signup } from '../components/Signup';
 import { Signin } from '../components/Signin';
+import { Loader } from "../components/Loader";
 
-const AuthPage = observer((props) => {
+const authRoutes = ['signin', 'signup']
+const AuthPage = observer(({ history, match }) => {
 
+    const query = useQuery();
+    const qName = query.get("q");
     const rootStoreContext = useContext(RootStoreContext);
     const { userStore } = rootStoreContext;
-    const [view, setView] = useState('signin');
+    const [view, setView] = useState('');
     const [error, setError] = useState(null);
-    const [loading, setLoader] = useState(false);
+    const [loading, setLoader] = useState(true);
+
+    useEffect(() => {
+        const setUserView = qName && authRoutes.includes(qName) ? qName : 'signin';
+        setLoader(false)
+        setView(setUserView);
+    }, [qName])
 
     const changeView = (event, viewTo) => {
         event.preventDefault();
@@ -24,8 +35,7 @@ const AuthPage = observer((props) => {
     }
 
     const routeTo = (route) => {
-        // setToken('token:secret');
-        props.history.replace('home');
+        history.replace('home');
     }
 
     const onSignup = async (newUser) => {
@@ -72,6 +82,9 @@ const AuthPage = observer((props) => {
                         </>
                 }
             </div>
+            {
+                loading && <Loader type="large" />
+            }
         </div>
     )
 })
