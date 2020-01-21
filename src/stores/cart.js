@@ -1,22 +1,29 @@
 import { observable, action, decorate } from "mobx";
-import { createContext } from "react";
+import { findIfProductExistInCart } from "../utils/common";
 
-class CartStore {
+class AppCartStore {
     rootState;
-    carts = [];
+    loader = false;
+    cart = [];
+    total = 0;
     constructor(rootState) {
         this.rootState = rootState;
     }
     addCart(cart) {
-        this.carts.push(cart);
+        let { found, index } = findIfProductExistInCart(this.cart, cart.product.id);
+        if (found) {
+            this.cart[index].cartQty++;
+        } else {
+            this.cart.push(cart);
+        }
+        this.total += +cart.cartQty * +cart.product.price;
     }
 }
 
-CartStore = decorate(CartStore, {
-    carts: observable,
-    setCart: action,
+AppCartStore = decorate(AppCartStore, {
+    total: observable,
+    cart: observable,
+    addCart: action,
 });
 
-export { CartStore }
-
-// export const ProductStoreContext = createContext(new ProductStore());
+export { AppCartStore };

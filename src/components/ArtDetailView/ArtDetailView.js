@@ -1,6 +1,6 @@
 import React from "react";
 
-export const ArtDetailView = ({ product }) => {
+export const ArtDetailView = ({ product, onCartAdd }) => {
 
 
     return (
@@ -31,6 +31,9 @@ export const ArtDetailView = ({ product }) => {
                     <div className="m-2">
                         <h5>Curator</h5>
                         <p>{product.user.name}</p>
+                    </div>
+                    <div className="m-2">
+                        <button className="btn btn-outline-mkh" onClick={() => onCartAdd(product)}>Add to Cart</button>
                     </div>
                 </div>
             </div>

@@ -12,7 +12,7 @@ const Header = observer(({ history }) => {
     const [loggedin, setLoggedin] = useState(false)
     const [cartsLength, setCartsLength] = useState(0)
     const rootStoreContext = useContext(RootStoreContext);
-    const { userStore, cartStore } = rootStoreContext;
+    const { userStore, appCartStore } = rootStoreContext;
 
     useEffect(() => {
         setLoggedin(userStore.isLoggedin)
@@ -22,8 +22,8 @@ const Header = observer(({ history }) => {
         * to listen cart array 
      */
     useEffect(() => {
-        setCartsLength(cartStore.carts.length)
-    }, [cartStore.carts])
+        setCartsLength(appCartStore.cart.length)
+    }, [appCartStore.cart.length])
 
     const handleRouteTo = (event, where) => {
         event.preventDefault();

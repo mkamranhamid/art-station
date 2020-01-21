@@ -38,3 +38,18 @@ export function getPublishedDate() {
 export function useQuery() {
     return new URLSearchParams(useLocation().search);
 }
+
+export function findIfProductExistInCart(cartArr, productId) {
+    let product = {
+        found: false,
+        index: null
+    };
+    for (let i = 0; i < cartArr.length; i++) {
+        if (cartArr[i].product.id == productId) {
+            product.found = true;
+            product.index = i;
+            break
+        }
+    }
+    return product;
+}

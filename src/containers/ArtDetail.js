@@ -8,13 +8,13 @@ import { fetchProductDetailById } from '../utils/crud';
 import { ArtDetailView } from "../components/ArtDetailView";
 import { Loader } from "../components/Loader";
 
-export const ArtDetailPage = ({ history, match }) => {
+export const ArtDetailPage = observer(({ history, match }) => {
 
     const [error, setError] = useState(null);
     const [loading, setLoader] = useState(true);
     const [product, setProduct] = useState(null)
     const rootStoreContext = useContext(RootStoreContext);
-    const { userStore } = rootStoreContext;
+    const { userStore, appCartStore } = rootStoreContext;
 
     useEffect(() => {
         let mounted = true;
@@ -23,7 +23,7 @@ export const ArtDetailPage = ({ history, match }) => {
             try {
                 const prod = await fetchProductDetailById(id)
                 setLoader(false)
-                setProduct(prod)
+                setProduct({ ...prod, id })
             } catch (err) {
                 console.log(err)
                 setLoader(false)
@@ -35,13 +35,26 @@ export const ArtDetailPage = ({ history, match }) => {
         }
     }, [])
 
+    const handleAddToCard = ({ image, price, title, id }) => {
+        let cartPayload = {
+            cartQty: 1,
+            product: {
+                id,
+                image,
+                price,
+                title
+            }
+        }
+        // cartStore.addCart(cartPayload);
+        appCartStore.addCart(cartPayload)
+    }
+
     return (
         <div className="w-100 d-flex justify-content-center">
-            {product && <ArtDetailView product={product} />}
+            {product && <ArtDetailView product={product} onCartAdd={handleAddToCard} />}
             {
                 loading && <Loader type="large" />
             }
         </div>
-
     )
-}
+})
