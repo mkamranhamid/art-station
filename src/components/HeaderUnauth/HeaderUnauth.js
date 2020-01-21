@@ -6,12 +6,16 @@ import { faShoppingCart, faChevronDown, faCircle } from '@fortawesome/free-solid
 
 function HeaderUnauth({ routeTo, state, logout, cart }) {
 
+    const handleCartClick = (event) => {
+        if (!cart) return
+        routeTo(event, '/cart')
+    }
     return (
         <Navbar expand="lg">
             <Navbar.Brand href="#home" onClick={(event) => routeTo(event, '/home')}>ART STATION</Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
-                <span className="fa-layers fa-fw mr-3">
+                <span className="fa-layers fa-fw mr-3" onClick={handleCartClick}>
                     <FontAwesomeIcon icon={faShoppingCart} size='lg' color="#363636" />
                     {cart && <span className="badge">{cart}</span>}
                 </span>

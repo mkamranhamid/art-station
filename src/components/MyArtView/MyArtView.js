@@ -17,8 +17,8 @@ function MyArtView({ products, onActionChange }) {
     }
     return (
         <div className="container">
-            {
-                products.length && <table className="table table-responsive">
+            <div className="table-responsive">
+                <table className="table">
                     <thead>
                         <tr>
                             <th>#</th>
@@ -62,7 +62,7 @@ function MyArtView({ products, onActionChange }) {
                         }
                     </tbody>
                 </table>
-            }
+            </div>
         </div>
     )
 }

@@ -29,6 +29,10 @@ export const ArtDetailView = ({ product, onCartAdd }) => {
                         <p>{product.category}</p>
                     </div>
                     <div className="m-2">
+                        <h5>Price</h5>
+                        <p>{product.price} €</p>
+                    </div>
+                    <div className="m-2">
                         <h5>Curator</h5>
                         <p>{product.user.name}</p>
                     </div>

@@ -109,3 +109,29 @@ export async function fetchProductDetailById(id) {
         throw err;
     }
 }
+
+export async function placeOrder(address, uid, carts, total) {
+    let createdOrder = await createOrder(address, uid, total)
+    carts.map(async (cart) => await createCart(createdOrder.id, cart.product.id, cart.cartQty))
+    // let createdCart = await createCart(createdOrder.id, cart.product.id, cart.cartQty)
+    console.log("createdOrder: ", createdOrder)
+    // console.log("createdCart: ", createdCart)
+    return
+}
+
+async function createOrder(address, uid, total) {
+    try {
+        let order = await firestore.collection(`orders`).add({ ...address, uid, total });
+        return order
+    } catch (err) {
+        throw err
+    }
+}
+async function createCart(orderId, productId, quantity) {
+    try {
+        let cart = await firestore.collection(`cart`).add({ orderId, productId, quantity });
+        return cart;
+    } catch (err) {
+        throw err;
+    }
+}

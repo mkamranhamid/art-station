@@ -13,6 +13,8 @@ import { EditArtPage } from './containers/EditArt';
 import { ProfilePage } from './containers/Profile';
 import { MyArtPage } from './containers/MyArt';
 import { ArtDetailPage } from './containers/ArtDetail';
+import { AddToCartPage } from './containers/AddToCart';
+import { CheckoutPage } from './containers/Checkout';
 
 function Routes() {
   return (
@@ -32,6 +34,8 @@ function PrivateRoute() {
       <Route path="/" component={Main} />
       <Route path="/home" component={HomePage} />
       <Route path="/art/:id" component={ArtDetailPage} />
+      <Route path="/cart" component={AddToCartPage} />
+      <Route path="/checkout" component={CheckoutPage} />
       <Route exact path="/account" component={AccountPage} />
       <Route path="/account/add-art" component={AddArtPage} />
       <Route path="/account/edit-art/:id" component={EditArtPage} />

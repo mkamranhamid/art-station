@@ -18,12 +18,17 @@ class AppCartStore {
         }
         this.total += +cart.cartQty * +cart.product.price;
     }
+    refreshCart() {
+        this.cart = [];
+        this.total = 0;
+    }
 }
 
 AppCartStore = decorate(AppCartStore, {
     total: observable,
     cart: observable,
     addCart: action,
+    refreshCart: action,
 });
 
 export { AppCartStore };
