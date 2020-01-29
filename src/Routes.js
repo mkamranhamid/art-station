@@ -15,6 +15,8 @@ import { MyArtPage } from './containers/MyArt';
 import { ArtDetailPage } from './containers/ArtDetail';
 import { AddToCartPage } from './containers/AddToCart';
 import { CheckoutPage } from './containers/Checkout';
+import { OrderHistoryPage } from './containers/OrderHistory';
+import { UsersPage } from './containers/Users';
 
 function Routes() {
   return (
@@ -41,6 +43,8 @@ function PrivateRoute() {
       <Route path="/account/edit-art/:id" component={EditArtPage} />
       <Route path="/account/my-art" component={MyArtPage} />
       <Route path="/account/profile" component={ProfilePage} />
+      <Route path="/account/orders" component={OrderHistoryPage} />
+      <Route path="/account/users" component={UsersPage} />
     </>
   );
 }
@@ -52,6 +56,7 @@ function PublicRoutes() {
       <Route path="/" component={Main} />
       <Route path="/home" component={HomePage} />
       <Route path="/art/:id" component={ArtDetailPage} />
+      <Route path="/cart" component={AddToCartPage} />
       <Route path="/auth" component={AuthPage} />
     </>
   );

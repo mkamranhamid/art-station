@@ -35,14 +35,15 @@ export const ArtDetailPage = observer(({ history, match }) => {
         }
     }, [])
 
-    const handleAddToCard = ({ image, price, title, id }) => {
+    const handleAddToCard = ({ image, price, title, id, uid }) => {
         let cartPayload = {
             cartQty: 1,
             product: {
                 id,
                 image,
                 price,
-                title
+                title,
+                productUUID: uid
             }
         }
         // cartStore.addCart(cartPayload);

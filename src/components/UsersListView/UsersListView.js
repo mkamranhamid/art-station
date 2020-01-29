@@ -1,19 +1,25 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Dropdown } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrash, faPen } from '@fortawesome/free-solid-svg-icons'
 import { Link } from "react-router-dom";
 
-function MyArtView({ products, onActionChange }) {
+function UsersListView({ users, onStatusChange }) {
 
-    const [selectedAction, setAction] = useState('Select Action');
-    const actions = [
-        { id: 0, icon: faPen, title: "Edit" },
-        { id: 1, icon: faTrash, title: "Remove" },
+    const [selectedStatus, setAction] = useState('Select Action');
+    const statuses = [
+        { id: 0, title: "active" },
+        { id: 1, title: "pending" },
+        { id: 2, title: "deactive" },
     ]
 
-    if (!products.length) {
-        return <h6>No Art found :( Add your art from account/<Link to="/account/add-art">Add Art</Link></h6>
+    const setUserStatus = (status, uid, ind) => {
+        users[ind].status = status;
+        onStatusChange(status, uid)
+    }
+
+    if (!users.length) {
+        return <h6>No User found :( Add your art from account/<Link to="/account/add-art">Add Art</Link></h6>
     }
     return (
         <div className="container">
@@ -22,41 +28,42 @@ function MyArtView({ products, onActionChange }) {
                     <thead>
                         <tr>
                             <th>#</th>
-                            <th>Title</th>
-                            <th>Price</th>
-                            <th>Date</th>
-                            <th>Action</th>
+                            <th>Name</th>
+                            <th>Username</th>
+                            <th>Status</th>
+                            <th>Email</th>
+                            <th>Role</th>
                         </tr>
                     </thead>
                     <tbody>
                         {
-                            products.map((product, ind) => (
+                            users.map((user, ind) => (
                                 <tr key={ind}>
                                     <th scope="row">{ind + 1}</th>
-                                    <td>{product.title}</td>
-                                    <td>{product.price}</td>
-                                    <td>{product.publishedAt}</td>
+                                    <td>{user.name}</td>
+                                    <td>{user.username}</td>
                                     <td>
                                         <Dropdown>
                                             <Dropdown.Toggle className="p-0" variant="" id="dropdown-basic">
-                                                {selectedAction}
+                                                {user.status}
                                             </Dropdown.Toggle>
                                             <Dropdown.Menu>
                                                 {
-                                                    actions.map((act) => (
+                                                    statuses.map((status) => (
                                                         <Dropdown.Item
-                                                            key={act.id}
+                                                            key={status.id}
                                                             href={false}
-                                                            eventKey={act.id}
-                                                            onSelect={(eKey) => onActionChange(act.title, product.id)}>
-                                                            <FontAwesomeIcon icon={act.icon} />
-                                                            <span className="ml-2">{act.title}</span>
+                                                            eventKey={status.id}
+                                                            onSelect={(eKey) => onStatusChange(status.title, user.id, ind)}>
+                                                            <span className="ml-2">{status.title}</span>
                                                         </Dropdown.Item>
                                                     ))
                                                 }
                                             </Dropdown.Menu>
                                         </Dropdown>
                                     </td>
+                                    <td>{user.email}</td>
+                                    <td>{user.role}</td>
                                 </tr>
                             ))
                         }
@@ -67,4 +74,4 @@ function MyArtView({ products, onActionChange }) {
     )
 }
 
-export { MyArtView }
+export { UsersListView }

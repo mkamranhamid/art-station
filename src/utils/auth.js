@@ -14,18 +14,18 @@ export async function createUser(userCredentials) {
 }
 
 function addUser(user) {
-    let userRef = firestore.doc(`user/${user.uid}`);
+    let userRef = firestore.doc(`users/${user.uid}`);
     userRef.set(user);
 }
 
 export function updateUser(user) {
-    let userRef = firestore.collection('user').doc(user.uid);
+    let userRef = firestore.collection('users').doc(user.uid);
     userRef.update(user);
 }
 
 export async function getUser(uid) {
     try {
-        const user = await firestore.doc(`user/${uid}`).get();
+        const user = await firestore.doc(`users/${uid}`).get();
         if (!user.exists) {
             throw new Error('Error: User dont exist in our database');
         }

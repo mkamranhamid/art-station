@@ -82,6 +82,70 @@ export async function fetchAllProductsByUID(uid) {
     }
 }
 
+export async function fetchAllOrdersByUID(uid, role) {
+    try {
+        let orders = [];
+        if (role == 'user') {
+            orders = await fetchAllUserOrdersByUID(uid);
+        } else if (role == 'artist') {
+            orders = await fetchAllArtistOrdersByUID(uid);
+        } else if (role == 'admin') {
+            orders = await fetchAllOrders();
+        }
+        return orders;
+    } catch (err) {
+        throw err;
+    }
+}
+
+async function fetchAllUserOrdersByUID(uid) {
+    try {
+        const OrdersRef = firestore.collection(`orders`);
+        const OrdersSnapshot = await OrdersRef.where('uid', '==', uid).get();
+        let orders = []
+        OrdersSnapshot.forEach(doc => {
+            orders.push({ ...doc.data(), id: doc.id });
+        });
+        return orders;
+    } catch (err) {
+        throw err;
+    }
+}
+
+async function fetchAllOrders() {
+    try {
+        const OrdersRef = firestore.collection(`orders`);
+        const OrdersSnapshot = await OrdersRef.get();
+        let orders = []
+        OrdersSnapshot.forEach(doc => {
+            orders.push({ ...doc.data(), id: doc.id });
+        });
+        return orders;
+    } catch (err) {
+        throw err;
+    }
+}
+
+async function loopThruCartToGetProduct(CartsSnapshot) {
+    let products = CartsSnapshot.docs.map(async (doc) => await fetchProductById(doc.data().productId))
+    let allProds = await Promise.all(products)
+    let cartProducts = CartsSnapshot.docs.map((doc, ind) => {
+        return { ...doc.data(), id: doc.id, product: allProds[ind] }
+    })
+    return cartProducts;
+}
+
+async function fetchAllArtistOrdersByUID(uid) {
+    try {
+        const CartsRef = firestore.collection(`carts`);
+        const CartsSnapshot = await CartsRef.where('productUUID', '==', uid).get();
+        let orders = await loopThruCartToGetProduct(CartsSnapshot);
+        return orders;
+    } catch (err) {
+        throw err;
+    }
+}
+
 export async function fetchProductById(id) {
     try {
         const product = await firestore.doc(`products/${id}`).get();
@@ -100,7 +164,7 @@ export async function fetchProductDetailById(id) {
         if (!product.exists) {
             throw new Error('Error: Product dont exist in our database');
         }
-        const user = await firestore.doc(`user/${product.data().uid}`).get();
+        const user = await firestore.doc(`users/${product.data().uid}`).get();
         if (!user.exists) {
             throw new Error('Error: User doesnt exist in our database');
         }
@@ -111,26 +175,48 @@ export async function fetchProductDetailById(id) {
 }
 
 export async function placeOrder(address, uid, carts, total) {
-    let createdOrder = await createOrder(address, uid, total)
-    carts.map(async (cart) => await createCart(createdOrder.id, cart.product.id, cart.cartQty))
+    let publishedAt = getPublishedDate()
+    let createdOrder = await createOrder(address, uid, total, publishedAt)
+    carts.map(async (cart) => await createCart({
+        orderId: createdOrder.id,
+        productId: cart.product.id,
+        productUUID: cart.product.productUUID,
+        quantity: cart.cartQty,
+        publishedAt
+    }))
     // let createdCart = await createCart(createdOrder.id, cart.product.id, cart.cartQty)
     console.log("createdOrder: ", createdOrder)
     // console.log("createdCart: ", createdCart)
     return
 }
 
-async function createOrder(address, uid, total) {
+async function createOrder(address, uid, total, publishedAt) {
+
     try {
-        let order = await firestore.collection(`orders`).add({ ...address, uid, total });
+        let order = await firestore.collection(`orders`).add({ ...address, uid, total, publishedAt });
         return order
     } catch (err) {
         throw err
     }
 }
-async function createCart(orderId, productId, quantity) {
+async function createCart({ orderId, ...cartPayload }) {
     try {
-        let cart = await firestore.collection(`cart`).add({ orderId, productId, quantity });
+        let cart = await firestore.collection(`carts`).add({ orderId, ...cartPayload });
         return cart;
+    } catch (err) {
+        throw err;
+    }
+}
+
+export async function fetchAllUsers(uid) {
+    try {
+        const usersRef = firestore.collection(`users`);
+        const usersSnapshot = await usersRef.where('uid', '>', uid).get();
+        let users = []
+        usersSnapshot.forEach(doc => {
+            users.push({ ...doc.data(), id: doc.id });
+        });
+        return users;
     } catch (err) {
         throw err;
     }

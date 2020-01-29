@@ -8,13 +8,22 @@ import { AccountView } from "../components/AccountView";
 
 const AccountPage = observer(({ history }) => {
 
+    const [role, setRole] = useState('user');
+    const rootStoreContext = useContext(RootStoreContext);
+    const { userStore } = rootStoreContext;
+
+    useEffect(() => {
+        if (!userStore.user) return;
+        setRole(userStore.user.role)
+    }, [userStore.isLoggedin])
+
     const handleRouteTo = (where) => {
         history.push(where);
     }
 
     return (
         <div>
-            <AccountView routeTo={handleRouteTo} />
+            <AccountView routeTo={handleRouteTo} role={role} />
         </div>
     )
 })

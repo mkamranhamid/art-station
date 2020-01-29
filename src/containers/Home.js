@@ -17,34 +17,6 @@ const HomePage = observer(({ history }) => {
     const rootStoreContext = useContext(RootStoreContext);
     const { userStore } = rootStoreContext;
 
-    const data = [
-        {
-            image: `${process.env.PUBLIC_URL}/images/products/paint1.jpg`,
-            title: "Snickers eShop",
-            publishedAt: "October 25, 2018",
-        },
-        {
-            image: `${process.env.PUBLIC_URL}/images/products/paint2.jpg`,
-            title: "Uruoi Japanese Skincare",
-            publishedAt: "August 13, 2019",
-        },
-        {
-            image: `${process.env.PUBLIC_URL}/images/products/paint7.jpg`,
-            title: "Curioso - Photography",
-            publishedAt: "September 17, 2018",
-        },
-        {
-            image: `${process.env.PUBLIC_URL}/images/products/paint9.jpg`,
-            title: "Steve Johnson",
-            publishedAt: "December 31, 2019",
-        },
-        {
-            image: `${process.env.PUBLIC_URL}/images/products/paint10.jpg`,
-            title: "Ussgs",
-            publishedAt: "December 31, 2019",
-        },
-    ]
-
     useEffect(() => {
         let mounted = true;
         const thisSetProducts = setItems;

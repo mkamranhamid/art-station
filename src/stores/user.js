@@ -9,11 +9,8 @@ class UserStore {
     constructor(rootState) {
         this.rootState = rootState;
     }
-    addCount(counter) {
-        this.counter++;
-    }
-    subCount(counter) {
-        this.counter--;
+    setUsers(users) {
+        this.users = users;
     }
     setUser(user) {
         this.user = user;
@@ -29,7 +26,8 @@ UserStore = decorate(UserStore, {
     counter: observable,
     user: observable,
     isLoggedin: observable,
-    setContacts: action,
+    setUsers: action,
+    removeUser: action,
     setUser: action,
 });
 

@@ -30,6 +30,7 @@ const AuthGuard = observer(({ history, children }) => {
             .catch((err) => {
                 console.log(err);
                 setLoader(false)
+                removeToken()
                 // history.push("/auth");
             });
     }, [userStore.isLoggedin])

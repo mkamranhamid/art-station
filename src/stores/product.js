@@ -4,6 +4,7 @@ import { createContext } from "react";
 class ProductStore {
     rootState;
     products = undefined;
+    orders = undefined;
     productsByUID = undefined;
     fetching = {
         allProducts: false,
@@ -14,6 +15,9 @@ class ProductStore {
     }
     setProducts(prods) {
         this.products = prods;
+    }
+    setOrders(ords) {
+        this.orders = ords;
     }
     setProductsByUID(prods) {
         this.productsByUID = prods;

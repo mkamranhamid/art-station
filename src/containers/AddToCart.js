@@ -9,16 +9,23 @@ import { AddToCartView } from "../components/AddToCartView";
 const AddToCartPage = observer(({ history }) => {
 
     const rootStoreContext = useContext(RootStoreContext);
-    const { appCartStore } = rootStoreContext;
+    const { appCartStore, userStore } = rootStoreContext;
     const [cart, setCart] = useState();
     const [total, setTotal] = useState();
+    const [loggedin, setLoggedin] = useState(false)
 
     useEffect(() => {
         setCart(appCartStore.cart);
         setTotal(appCartStore.total);
-    }, [appCartStore.cart.length])
+        setLoggedin(userStore.isLoggedin)
+    }, [appCartStore.cart.length, userStore.isLoggedin])
 
     const handleCheckoutClick = () => {
+
+        if (!loggedin) {
+            history.push('/auth');
+            return;
+        }
         history.push('/checkout');
     }
 

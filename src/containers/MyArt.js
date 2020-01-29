@@ -10,13 +10,15 @@ import { Loader } from "../components/Loader";
 const MyArtPage = observer(({ history }) => {
 
     const [products, setProducts] = useState(null);
+    const [role, setRole] = useState('user');
     const [error, setError] = useState(null);
     const [loading, setLoader] = useState(true);
     const rootStoreContext = useContext(RootStoreContext);
     const { productStore, userStore } = rootStoreContext;
 
     useEffect(() => {
-        if (!userStore.user) return
+        if (!userStore.user) return;
+        setRole(userStore.user.role)
         fetchAllProductsByUID(userStore.user.uid)
             .then((prods) => {
                 productStore.setProductsByUID(prods)
@@ -40,7 +42,7 @@ const MyArtPage = observer(({ history }) => {
         <div className="w-100 d-flex justify-content-center">
             {products && <MyArtView products={products} onActionChange={handleActionChange} />}
             {
-               loading && <Loader type="large" />
+                loading && <Loader type="large" />
             }
         </div>
     )

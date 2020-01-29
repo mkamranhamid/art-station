@@ -102,6 +102,17 @@ function CheckoutView({ total, onPlaceOrder, loading }) {
             </div>
             <div className="row">
                 <div className="col-md-12">
+                    <div className="alert alert-secondary" role="alert">
+                        <strong>Note:</strong> {'\u00A0'}
+                        'Pay on Delivery' (POD) includes Cash on Delivery (COD) as well as
+                        additional digital payment facilities at your doorstep. You can pay for
+                        'Pay on Delivery' orders by cash at all locations and by
+                        Debit card / Credit card / Net banking in select locations
+                    </div>
+                </div>
+            </div>
+            <div className="row">
+                <div className="col-md-12">
                     <Button loading={loading} onClick={handlePlaceorder}>Place order</Button>
                 </div>
             </div>

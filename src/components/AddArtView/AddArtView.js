@@ -91,7 +91,7 @@ function AddArtView({ onSubmit, error, loading, product }) {
                             onChange={({ target }) => setPrice(target.value)}
                         />
                     </div>
-                    <div className="form-group">
+                    {/* <div className="form-group">
                         <label htmlFor="addart-price">Quantity</label>
                         <input
                             type="number"
@@ -103,7 +103,7 @@ function AddArtView({ onSubmit, error, loading, product }) {
                             value={quantity}
                             onChange={({ target }) => setQuantity(target.value)}
                         />
-                    </div>
+                    </div> */}
                     <div className="form-group">
                         <label htmlFor="register-role">Category</label>
                         <Dropdown>

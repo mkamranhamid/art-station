@@ -1,14 +1,10 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faHeart, faSave, faSignal, faUserAlt, faDumpster, faBoxOpen, faPalette } from '@fortawesome/free-solid-svg-icons'
+import { faHeart, faSave, faSignal, faUserAlt, faDumpster, faBoxOpen, faPalette,faUsers } from '@fortawesome/free-solid-svg-icons'
 
-function AccountView({ routeTo }) {
-    const items = [
-        {
-            icon: faPalette,
-            title: "My Art",
-            route: '/account/my-art'
-        },
+function AccountView({ routeTo, role }) {
+    let additional_items = [];
+    let items = [
         {
             icon: faUserAlt,
             title: "Profile",
@@ -17,20 +13,40 @@ function AccountView({ routeTo }) {
         {
             icon: faDumpster,
             title: "Order History",
-            route: '/home'
+            route: '/account/orders'
         },
-        {
-            icon: faBoxOpen,
-            title: "Add Art",
-            route: '/account/add-art'
-        },
-        {
+        /* {
             icon: faSignal,
             title: "Dashboard",
             route: '/home'
-        },
-
+        }, */
     ]
+    if (role == 'artist') {
+        additional_items = [
+            {
+                icon: faBoxOpen,
+                title: "Add Art",
+                route: '/account/add-art'
+            },
+
+            {
+                icon: faPalette,
+                title: "My Art",
+                route: '/account/my-art'
+            },
+        ]
+    }
+    if (role == 'admin') {
+        additional_items = [
+            {
+                icon: faUsers,
+                title: "Users",
+                route: '/account/users'
+            },
+        ]
+    }
+    items = items.concat(additional_items)
+
     return (
         <div className="container account-container">
             <div className="row justify-content-center">
