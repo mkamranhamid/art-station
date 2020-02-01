@@ -1,6 +1,6 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faHeart, faSave, faSignal, faUserAlt, faDumpster, faBoxOpen, faPalette,faUsers } from '@fortawesome/free-solid-svg-icons'
+import { faHeart, faSave, faSignal, faUserAlt, faDumpster, faBoxOpen, faPalette, faUsers, faBoxes } from '@fortawesome/free-solid-svg-icons'
 
 function AccountView({ routeTo, role }) {
     let additional_items = [];
@@ -42,6 +42,11 @@ function AccountView({ routeTo, role }) {
                 icon: faUsers,
                 title: "Users",
                 route: '/account/users'
+            },
+            {
+                icon: faBoxes,
+                title: "Products",
+                route: '/account/products'
             },
         ]
     }

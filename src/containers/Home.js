@@ -3,7 +3,7 @@ import { observer } from 'mobx-react-lite';
 
 import { RootStoreContext } from '../stores/rootStore';
 import { getUser } from '../utils/auth';
-import { fetchAllProducts } from '../utils/crud';
+import { fetchAllActiveProducts } from '../utils/crud';
 
 import { getToken, removeToken } from '../utils/common';
 
@@ -22,7 +22,7 @@ const HomePage = observer(({ history }) => {
         const thisSetProducts = setItems;
         const productFetcher = async () => {
             try {
-                const prod = await fetchAllProducts()
+                const prod = await fetchAllActiveProducts()
                 setProducts(prod)
             } catch (err) {
                 console.log(err)

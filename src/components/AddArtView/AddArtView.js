@@ -44,7 +44,7 @@ function AddArtView({ onSubmit, error, loading, product }) {
             return
         }
         // const file = fileInput.current.files[0]
-        onSubmit({ title, description, file, price, quantity, category: selectedCategory });
+        onSubmit({ title, description, file, price, quantity, category: selectedCategory, status: 'active' });
     }
 
     return (

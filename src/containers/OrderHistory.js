@@ -35,10 +35,10 @@ const OrderHistoryPage = observer(({ history }) => {
     const createTableRowsForUser = (ords) => {
         let newOrders = ords.map((order) => {
             let newOrder = [];
-            newOrder.push(`${order.firstName} ${order.lastName}`)
+            newOrder.push(`${order.id}`)
             newOrder.push(`${order.street}`)
             newOrder.push(`${order.zip}`)
-            newOrder.push(`${order.total}`)
+            newOrder.push(`${order.total} €`)
             newOrder.push(`${order.publishedAt}`)
             return newOrder;
         })
@@ -68,15 +68,19 @@ const OrderHistoryPage = observer(({ history }) => {
         }
     }
 
-    const renderViewByRole = () => {
-        if (role == 'user') {
-            return <OrderHistoryView orders={orders} heads={tableHead} />
-        }
+    const routeTo = (oid) => {
+        history.replace(`/account/orders/${oid}`);
     }
 
     return (
         <div className="w-100 d-flex justify-content-center">
-            {orders && <OrderHistoryView orders={orders} heads={tableHead} />}
+            {
+                orders && <OrderHistoryView
+                    orders={orders}
+                    heads={tableHead}
+                    onRowPress={routeTo}
+                />
+            }
             {
                 loading && <Loader type="large" />
             }

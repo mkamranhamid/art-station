@@ -18,7 +18,7 @@ function MyArtView({ products, onActionChange }) {
     return (
         <div className="container">
             <div className="table-responsive">
-                <table className="table">
+                <table className="table table-striped">
                     <thead>
                         <tr>
                             <th>#</th>

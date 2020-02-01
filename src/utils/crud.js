@@ -54,6 +54,20 @@ async function updateProduct(product, id) {
     }
 }
 
+export async function fetchAllActiveProducts() {
+    try {
+        const productRef = firestore.collection(`products`);
+        const productSnapshot = await productRef.where('status', '==', 'active').get();
+        let products = []
+        productSnapshot.forEach(doc => {
+            products.push({ ...doc.data(), id: doc.id });
+        });
+        return products;
+    } catch (err) {
+        throw err;
+    }
+}
+
 export async function fetchAllProducts() {
     try {
         const productRef = firestore.collection(`products`);
@@ -217,6 +231,20 @@ export async function fetchAllUsers(uid) {
             users.push({ ...doc.data(), id: doc.id });
         });
         return users;
+    } catch (err) {
+        throw err;
+    }
+}
+
+export async function fetchCartsByOrderId(oid) {
+    try {
+        const CartsRef = firestore.collection(`carts`);
+        const CartsSnapshot = await CartsRef.where('orderId', '==', oid).get();
+        let carts = await loopThruCartToGetProduct(CartsSnapshot)
+        /* CartsSnapshot.forEach(doc => {
+            carts.push({ ...doc.data(), id: doc.id });
+        }); */
+        return carts;
     } catch (err) {
         throw err;
     }

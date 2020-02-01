@@ -4,10 +4,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrash, faPen } from '@fortawesome/free-solid-svg-icons'
 import { Link } from "react-router-dom";
 
-function OrderHistoryView({ orders, heads, onRowPress }) {
+function OrderDetailView({ carts }) {
 
-    if (!orders.length) {
-        return <h6>No Order found :( </h6>
+    if (!carts.length) {
+        return <h6>No Cart found for this order :(</h6>
     }
     return (
         <div className="container">
@@ -16,23 +16,19 @@ function OrderHistoryView({ orders, heads, onRowPress }) {
                     <thead>
                         <tr>
                             <th>#</th>
-                            {
-                                heads.map((head, ind) => (
-                                    <th key={ind}>{head}</th>
-                                ))
-                            }
+                            <th>Order Id</th>
+                            <th>Product</th>
+                            <th>Date</th>
                         </tr>
                     </thead>
                     <tbody>
                         {
-                            orders.map((order, ind) => (
-                                <tr key={ind} onClick={() => onRowPress(order[0])}>
+                            carts.map((cart, ind) => (
+                                <tr key={ind}>
                                     <th scope="row">{ind + 1}</th>
-                                    {
-                                        order.map((odr, orderInd) => (
-                                            <td key={orderInd}>{odr}</td>
-                                        ))
-                                    }
+                                    <td>{cart.orderId}</td>
+                                    <td>{cart.product.title}</td>
+                                    <td>{cart.publishedAt}</td>
                                 </tr>
                             ))
                         }
@@ -43,4 +39,4 @@ function OrderHistoryView({ orders, heads, onRowPress }) {
     )
 }
 
-export { OrderHistoryView }
+export { OrderDetailView }

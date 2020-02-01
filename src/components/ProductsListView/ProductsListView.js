@@ -4,21 +4,20 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrash, faPen } from '@fortawesome/free-solid-svg-icons'
 import { Link } from "react-router-dom";
 
-function UsersListView({ users, onStatusChange }) {
+function ProductsListView({ products, onStatusChange }) {
 
     const [selectedStatus, setAction] = useState('Select Action');
     const statuses = [
         { id: 0, title: "active" },
-        { id: 1, title: "pending" },
-        { id: 2, title: "inactive" },
+        { id: 1, title: "inactive" },
     ]
 
     const setUserStatus = (status, uid, ind) => {
-        users[ind].status = status;
+        products[ind].status = status;
         onStatusChange(status, uid)
     }
 
-    if (!users.length) {
+    if (!products.length) {
         return <h6>No User found :( Add your art from account/<Link to="/account/add-art">Add Art</Link></h6>
     }
     return (
@@ -28,24 +27,28 @@ function UsersListView({ users, onStatusChange }) {
                     <thead>
                         <tr>
                             <th>#</th>
-                            <th>Name</th>
-                            <th>Username</th>
+                            <th>Title</th>
+                            <th>Description</th>
                             <th>Status</th>
-                            <th>Email</th>
-                            <th>Role</th>
+                            <th>Price</th>
+                            <th>Category</th>
                         </tr>
                     </thead>
                     <tbody>
                         {
-                            users.map((user, ind) => (
+                            products.map((product, ind) => (
                                 <tr key={ind}>
                                     <th scope="row">{ind + 1}</th>
-                                    <td>{user.name}</td>
-                                    <td>{user.username}</td>
+                                    <td>{product.title}</td>
+                                    <td>
+                                        <p className="tr-description">
+                                            {product.description}
+                                        </p>
+                                    </td>
                                     <td>
                                         <Dropdown>
                                             <Dropdown.Toggle className="p-0" variant="" id="dropdown-basic">
-                                                {user.status}
+                                                {product.status}
                                             </Dropdown.Toggle>
                                             <Dropdown.Menu>
                                                 {
@@ -54,7 +57,7 @@ function UsersListView({ users, onStatusChange }) {
                                                             key={status.id}
                                                             href={false}
                                                             eventKey={status.id}
-                                                            onSelect={(eKey) => onStatusChange(status.title, user.id, ind)}>
+                                                            onSelect={(eKey) => onStatusChange(status.title, product.id, ind)}>
                                                             <span className="ml-2">{status.title}</span>
                                                         </Dropdown.Item>
                                                     ))
@@ -62,8 +65,8 @@ function UsersListView({ users, onStatusChange }) {
                                             </Dropdown.Menu>
                                         </Dropdown>
                                     </td>
-                                    <td>{user.email}</td>
-                                    <td>{user.role}</td>
+                                    <td>{product.price} €</td>
+                                    <td>{product.category}</td>
                                 </tr>
                             ))
                         }
@@ -74,4 +77,4 @@ function UsersListView({ users, onStatusChange }) {
     )
 }
 
-export { UsersListView }
+export { ProductsListView }

@@ -1,0 +1,1 @@
+export { ProductsListView } from "./ProductsListView";
