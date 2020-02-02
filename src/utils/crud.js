@@ -191,17 +191,30 @@ export async function fetchProductDetailById(id) {
 export async function placeOrder(address, uid, carts, total) {
     let publishedAt = getPublishedDate()
     let createdOrder = await createOrder(address, uid, total, publishedAt)
-    carts.map(async (cart) => await createCart({
-        orderId: createdOrder.id,
-        productId: cart.product.id,
-        productUUID: cart.product.productUUID,
-        quantity: cart.cartQty,
-        publishedAt
-    }))
+    carts.map(async (cart) => {
+        updateProductById(cart.product.id, { quantity: 0 })
+        return await createCart({
+            orderId: createdOrder.id,
+            productId: cart.product.id,
+            productUUID: cart.product.productUUID,
+            quantity: cart.cartQty,
+            publishedAt
+        })
+    }
+
+    )
     // let createdCart = await createCart(createdOrder.id, cart.product.id, cart.cartQty)
     console.log("createdOrder: ", createdOrder)
     // console.log("createdCart: ", createdCart)
     return
+}
+
+function updateProductById(productId, payload) {
+    let productRef = firestore.collection('products').doc(productId);
+
+    // update the product document fields
+    let updateSingle = productRef.update(payload);
+
 }
 
 async function createOrder(address, uid, total, publishedAt) {

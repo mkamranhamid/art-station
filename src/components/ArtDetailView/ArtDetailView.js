@@ -37,7 +37,8 @@ export const ArtDetailView = ({ product, onCartAdd }) => {
                         <p>{product.user.name}</p>
                     </div>
                     <div className="m-2">
-                        <button className="btn btn-outline-mkh" onClick={() => onCartAdd(product)}>Add to Cart</button>
+                        {product.quantity > 0 && <button className="btn btn-outline-mkh" onClick={() => onCartAdd(product)}>Add to Cart</button>}
+                        {product.quantity == 0 && <h5 className="mkh-text">Sold</h5>}
                     </div>
                 </div>
             </div>

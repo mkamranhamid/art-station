@@ -12,7 +12,9 @@ function HeaderUnauth({ routeTo, state, logout, cart }) {
     }
     return (
         <Navbar expand="lg">
-            <Navbar.Brand href="#home" onClick={(event) => routeTo(event, '/home')}>ART STATION</Navbar.Brand>
+            <Navbar.Brand href="#home" onClick={(event) => routeTo(event, '/home')}>
+                <img src={`${process.env.PUBLIC_URL}/logo.PNG`} alt="art station" />
+            </Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
                 <span className="fa-layers fa-fw mr-3" onClick={handleCartClick}>

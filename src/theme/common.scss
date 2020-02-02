@@ -100,3 +100,13 @@ p, h1 {
       max-height: 140px;
       overflow: auto;
   }
+
+  .table-row-clickable {
+      tr {
+        cursor: pointer;
+      }
+  }
+
+  .mkh-text {
+      color: $color-red;
+  }

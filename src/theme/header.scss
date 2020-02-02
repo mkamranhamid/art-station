@@ -59,6 +59,12 @@ nav {
         color: #363636;
         border: 1px solid #d7d7d7;
       }
+      .navbar-brand {
+        width: 60px;
+        img{
+          width: 100%;
+        }
+      }
 }
 
 #search-form {

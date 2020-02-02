@@ -11,8 +11,8 @@ function OrderHistoryView({ orders, heads, onRowPress }) {
     }
     return (
         <div className="container">
-            <div className="table-responsive">
-                <table className="table table-striped">
+            <div className="table-responsive table-row-clickable">
+                <table className="table table-striped table-hover">
                     <thead>
                         <tr>
                             <th>#</th>
