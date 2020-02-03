@@ -26,7 +26,7 @@ function CheckoutView({ total, onPlaceOrder, loading }) {
     }
 
     return (
-        <div className="container">
+        <div className="container pt5">
             <div className="row">
                 <div className="col-md-12">
                     <h1 className="text-center">Checkout</h1>

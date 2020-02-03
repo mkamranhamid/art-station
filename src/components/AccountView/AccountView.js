@@ -53,7 +53,7 @@ function AccountView({ routeTo, role }) {
     items = items.concat(additional_items)
 
     return (
-        <div className="container account-container">
+        <div className="container account-container pt5">
             <div className="row justify-content-center">
                 {
                     items.map((item, ind) => (

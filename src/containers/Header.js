@@ -10,6 +10,7 @@ import { HeaderUnauth } from '../components/HeaderUnauth';
 const Header = observer(({ history }) => {
 
     const [loggedin, setLoggedin] = useState(false)
+    const [isTop, setIsTop] = useState(true)
     const [cartsLength, setCartsLength] = useState(0)
     const rootStoreContext = useContext(RootStoreContext);
     const { userStore, appCartStore } = rootStoreContext;
@@ -18,13 +19,25 @@ const Header = observer(({ history }) => {
         setLoggedin(userStore.isLoggedin)
     }, [userStore.isLoggedin])
 
+    useEffect(() => {
+        window.addEventListener('scroll', handleScroll)
+        return () => window.removeEventListener('scroll', handleScroll)
+    })
+
     /*
         * to listen cart array 
-     */
+    */
     useEffect(() => {
         setCartsLength(appCartStore.cart.length)
     }, [appCartStore.cart.length])
 
+    const handleScroll = (e) => {
+
+        const _isTop = window.scrollY < 70;
+        if (_isTop !== isTop) {
+            setIsTop(_isTop)
+        }
+    }
     const handleRouteTo = (event, where) => {
         event.preventDefault();
         if (where == "auth") {
@@ -40,7 +53,13 @@ const Header = observer(({ history }) => {
     }
 
     return (
-        <HeaderUnauth routeTo={handleRouteTo} state={loggedin} logout={doLogout} cart={cartsLength} />
+        <HeaderUnauth
+            routeTo={handleRouteTo}
+            state={loggedin}
+            logout={doLogout}
+            cart={cartsLength}
+            isTop={isTop}
+        />
     )
 })
 

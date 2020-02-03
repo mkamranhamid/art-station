@@ -68,6 +68,23 @@ export async function fetchAllActiveProducts() {
     }
 }
 
+export async function fetchAllActiveProductsByQuery(q) {
+    try {
+        const productRef = firestore.collection(`products`);
+        const productSnapshot = await productRef.where('status', '==', 'active')
+                                                .where('title', 'array-contains', q)
+                                                .orderBy('title')
+                                                .get();
+        let products = []
+        productSnapshot.forEach(doc => {
+            products.push({ ...doc.data(), id: doc.id });
+        });
+        return products;
+    } catch (err) {
+        throw err;
+    }
+}
+
 export async function fetchAllProducts() {
     try {
         const productRef = firestore.collection(`products`);

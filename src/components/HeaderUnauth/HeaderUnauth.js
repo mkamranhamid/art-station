@@ -1,17 +1,18 @@
-import React from 'react';
-import { Nav, Navbar, Form, NavDropdown, FormControl, Button } from 'react-bootstrap';
+import React, { useState } from 'react';
+import { Nav, Navbar, Form, NavDropdown, FormControl, Button, Dropdown } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faShoppingCart, faChevronDown, faCircle } from '@fortawesome/free-solid-svg-icons'
 
-function HeaderUnauth({ routeTo, state, logout, cart }) {
+function HeaderUnauth({ routeTo, state, logout, cart, isTop }) {
+
 
     const handleCartClick = (event) => {
         if (!cart) return
         routeTo(event, '/cart')
     }
     return (
-        <Navbar expand="lg">
+        <Navbar expand="lg" className={!isTop ? 'bg-white' : ''}>
             <Navbar.Brand href="#home" onClick={(event) => routeTo(event, '/home')}>
                 <img src={`${process.env.PUBLIC_URL}/logo.PNG`} alt="art station" />
             </Navbar.Brand>

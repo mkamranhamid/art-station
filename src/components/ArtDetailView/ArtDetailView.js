@@ -4,7 +4,7 @@ export const ArtDetailView = ({ product, onCartAdd }) => {
 
 
     return (
-        <div className="container">
+        <div className="container pt5">
             <div className="row">
                 <div className="col-md-12 col-sm-12 text-center">
                     <p>{product.publishedAt}</p>

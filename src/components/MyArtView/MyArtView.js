@@ -16,7 +16,7 @@ function MyArtView({ products, onActionChange }) {
         return <h6>No Art found :( Add your art from account/<Link to="/account/add-art">Add Art</Link></h6>
     }
     return (
-        <div className="container">
+        <div className="container pt5">
             <div className="table-responsive">
                 <table className="table table-striped">
                     <thead>

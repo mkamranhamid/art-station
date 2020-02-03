@@ -3,7 +3,7 @@ import { observer } from 'mobx-react-lite';
 
 import { RootStoreContext } from '../stores/rootStore';
 import { getUser } from '../utils/auth';
-import { fetchAllActiveProducts } from '../utils/crud';
+import { fetchAllActiveProducts, fetchAllActiveProductsByQuery } from '../utils/crud';
 
 import { getToken, removeToken } from '../utils/common';
 
@@ -16,6 +16,7 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons'
 const HomePage = observer(({ history }) => {
 
     const [products, setProducts] = useState(null)
+    const [searchVal, setSearchVal] = useState('')
     const [items, setItems] = useState([])
     const rootStoreContext = useContext(RootStoreContext);
     const { userStore } = rootStoreContext;
@@ -37,6 +38,19 @@ const HomePage = observer(({ history }) => {
         }
     }, [])
 
+    useEffect(() => {
+        console.log("USE EFFECT SEARCH VALUE ")
+        const productFetcher = async () => {
+            try {
+                const prod = await fetchAllActiveProductsByQuery(searchVal)
+                setProducts(prod)
+            } catch (err) {
+                console.log(err)
+            }
+        }
+        // productFetcher()
+    }, [searchVal])
+
     const handleThumbnailClick = (id) => {
         history.push(`/art/${id}`);
     }
@@ -50,7 +64,7 @@ const HomePage = observer(({ history }) => {
                 <div className="header-search">
                     <h2>The best art shared by talented artists from all over the world.</h2>
                     <div className="header-search-input">
-                        <input type="text" />
+                        <input type="text" value={searchVal} onChange={({ target }) => setSearchVal(target.value)} />
                         <FontAwesomeIcon icon={faSearch} />
                     </div>
                 </div>

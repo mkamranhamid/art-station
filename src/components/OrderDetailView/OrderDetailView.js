@@ -10,7 +10,7 @@ function OrderDetailView({ carts }) {
         return <h6>No Cart found for this order :(</h6>
     }
     return (
-        <div className="container">
+        <div className="container pt5">
             <div className="table-responsive">
                 <table className="table table-striped">
                     <thead>

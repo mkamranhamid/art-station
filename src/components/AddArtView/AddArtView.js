@@ -48,7 +48,7 @@ function AddArtView({ onSubmit, error, loading, product }) {
     }
 
     return (
-        <div className="container addart-container">
+        <div className="container addart-container pt5">
             <div className="col-sm-12 col-md-9 col-lg-9">
                 <h3 className="text-center">{heading} Art</h3>
                 <form onSubmit={formSubmit}>

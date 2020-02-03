@@ -4,7 +4,7 @@ import { useLocation } from "react-router-dom";
 
 import { RootStoreContext } from '../stores/rootStore';
 
-import { setToken, useQuery } from '../utils/common';
+import { setToken, useQuery, isPending } from '../utils/common';
 import { createUser, login } from '../utils/auth';
 
 import { Signup } from '../components/Signup';
@@ -54,10 +54,16 @@ const AuthPage = observer(({ history, match }) => {
         try {
             setLoader(true)
             const user = await login(credentials);
+            setLoader(false)
+            console.log("USER::", user)
+            if (isPending(user)) {
+                setError({ message: "Your request has been added to admin. Please wait for your request approval before moving forward." });
+                return
+            }
             userStore.setUser(user)
             setToken(user.uid)
             setLoader(false)
-            routeTo('home');
+            routeTo('/home');
         } catch (err) {
             setError(err);
             setLoader(false)
@@ -73,11 +79,11 @@ const AuthPage = observer(({ history, match }) => {
                 {
                     view == 'signin' ?
                         <>
-                            <p className="p-3">don't have an account? <a data-testid="a-signup" href={'false'} onClick={(event) => changeView(event, 'signup')}>sign up</a> </p>
+                            {/* <p className="p-3">don't have an account? <a data-testid="a-signup" href={'false'} onClick={(event) => changeView(event, 'signup')}>sign up</a> </p> */}
                             <Signin onSuccess={onSignin} error={error} loading={loading} />
                         </>
                         : <>
-                            <p className="p-3">already have an account? <a data-testid="a-signin" href={'false'} onClick={(event) => changeView(event, 'signin')}>sign in</a> </p>
+                            {/* <p className="p-3">already have an account? <a data-testid="a-signin" href={'false'} onClick={(event) => changeView(event, 'signin')}>sign in</a> </p> */}
                             <Signup onSuccess={onSignup} error={error} loading={loading} />
                         </>
                 }

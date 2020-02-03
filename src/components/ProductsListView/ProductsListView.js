@@ -21,7 +21,7 @@ function ProductsListView({ products, onStatusChange }) {
         return <h6>No User found :( Add your art from account/<Link to="/account/add-art">Add Art</Link></h6>
     }
     return (
-        <div className="container">
+        <div className="container pt5">
             <div className="table-responsive">
                 <table className="table table-striped">
                     <thead>

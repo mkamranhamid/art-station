@@ -18,7 +18,7 @@ function ProfileView({ user, loading, error, onSubmit }) {
     }
 
     return (
-        <div className="container signup-container">
+        <div className="container signup-container pt5">
             <div className="col-sm-12 col-md-9 col-lg-9">
                 <h4>Personal Info</h4>
                 <form onSubmit={formSubmit}>

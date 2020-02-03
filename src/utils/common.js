@@ -53,3 +53,8 @@ export function findIfProductExistInCart(cartArr, productId) {
     }
     return product;
 }
+
+export function isPending(user) {
+    if (!user) return false
+    return user.status == 'pending';
+}

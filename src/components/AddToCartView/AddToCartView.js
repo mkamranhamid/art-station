@@ -4,7 +4,7 @@ import { faHeart, faSave, faSignal, faUserAlt, faDumpster, faBoxOpen, faPalette 
 
 function AddToCartView({ data, total, onCheckout }) {
     return (
-        <div className="container account-container">
+        <div className="container account-container pt5">
             <div className="row justify-content-center">
                 <h1>CART</h1>
                 <div className="table-responsive">

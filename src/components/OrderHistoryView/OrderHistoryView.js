@@ -10,7 +10,7 @@ function OrderHistoryView({ orders, heads, onRowPress }) {
         return <h6>No Order found :( </h6>
     }
     return (
-        <div className="container">
+        <div className="container pt5">
             <div className="table-responsive table-row-clickable">
                 <table className="table table-striped table-hover">
                     <thead>
