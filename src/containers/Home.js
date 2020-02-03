@@ -9,6 +9,9 @@ import { getToken, removeToken } from '../utils/common';
 
 import { Thumbnail } from '../components/Thumbnail';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faSearch } from '@fortawesome/free-solid-svg-icons'
+
 
 const HomePage = observer(({ history }) => {
 
@@ -39,15 +42,29 @@ const HomePage = observer(({ history }) => {
     }
 
     return (
-        <div className="container">
-            <div className="row">
-                {
-                    products && products.map((d, i) => (
-                        <Thumbnail data={d} key={i} onClick={handleThumbnailClick} />
-                    ))
-                }
+        <>
+            <header className="header">
+                <div className="header-bg-img">
+                    <img src={`${process.env.PUBLIC_URL}/cover-1.png`} alt="cover image" />
+                </div>
+                <div className="header-search">
+                    <h2>The best art shared by talented artists from all over the world.</h2>
+                    <div className="header-search-input">
+                        <input type="text" />
+                        <FontAwesomeIcon icon={faSearch} />
+                    </div>
+                </div>
+            </header>
+            <div className="container">
+                <div className="row">
+                    {
+                        products && products.map((d, i) => (
+                            <Thumbnail data={d} key={i} onClick={handleThumbnailClick} />
+                        ))
+                    }
+                </div>
             </div>
-        </div>
+        </>
     )
 })
 

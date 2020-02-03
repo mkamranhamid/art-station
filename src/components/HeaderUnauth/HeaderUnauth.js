@@ -21,9 +21,9 @@ function HeaderUnauth({ routeTo, state, logout, cart }) {
                     <FontAwesomeIcon icon={faShoppingCart} size='lg' color="#363636" />
                     {cart && <span className="badge">{cart}</span>}
                 </span>
-                <form className="form-inline my-2 my-lg-0" id="search-form">
+                {/* <form className="form-inline my-2 my-lg-0" id="search-form">
                     <input placeholder="Search" type="search" className="search" />
-                </form>
+                </form> */}
                 {!state && <Nav className="">
                     <li className="nav-item">
                         <a className="nav-link" href="#" onClick={(event) => routeTo(event, '/auth?q=signin')}>Sign in</a>
