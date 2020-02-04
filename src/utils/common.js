@@ -58,3 +58,8 @@ export function isPending(user) {
     if (!user) return false
     return user.status == 'pending';
 }
+
+export function isArtist(user) {
+    if (!user) return false
+    return user.role == 'artist';
+}

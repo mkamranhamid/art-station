@@ -56,7 +56,7 @@ const AuthPage = observer(({ history, match }) => {
             const user = await login(credentials);
             setLoader(false)
             console.log("USER::", user)
-            if (isPending(user)) {
+            if (isPending(user) && isArtist(user)) {
                 setError({ message: "Your request has been added to admin. Please wait for your request approval before moving forward." });
                 return
             }
