@@ -4,7 +4,7 @@ import { useLocation } from "react-router-dom";
 
 import { RootStoreContext } from '../stores/rootStore';
 
-import { setToken, useQuery, isPending } from '../utils/common';
+import { setToken, useQuery, isPending, isArtist } from '../utils/common';
 import { createUser, login } from '../utils/auth';
 
 import { Signup } from '../components/Signup';
