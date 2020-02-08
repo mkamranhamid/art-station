@@ -6,11 +6,12 @@ import { getUser } from '../utils/auth';
 import { fetchCartsByOrderId } from '../utils/crud';
 
 import { OrderDetailView } from "../components/OrderDetailView";
+import { Loader } from "../components/Loader";
 
 const OrderDetailPage = observer(({ history, match }) => {
 
     const [error, setError] = useState(null);
-    const [loading, setLoader] = useState(false);
+    const [loading, setLoader] = useState(true);
     const [carts, setCarts] = useState(null)
     const rootStoreContext = useContext(RootStoreContext);
     const { userStore } = rootStoreContext;
@@ -21,8 +22,10 @@ const OrderDetailPage = observer(({ history, match }) => {
         const cartFetcher = async (id) => {
             try {
                 const crts = await fetchCartsByOrderId(id)
+                setLoader(false)
                 setCarts(crts)
             } catch (err) {
+                setLoader(false)
                 console.log(err)
             }
         }
@@ -33,8 +36,11 @@ const OrderDetailPage = observer(({ history, match }) => {
     }, [])
 
     return (
-        <div>
+        <div className="w-100 d-flex justify-content-center pt5">
             {carts && <OrderDetailView carts={carts} />}
+            {
+                loading && <Loader type="large" />
+            }
         </div>
     )
 })

@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faShoppingCart, faChevronDown, faCircle } from '@fortawesome/free-solid-svg-icons'
 
-function HeaderUnauth({ routeTo, state, logout, cart, isTop }) {
+function HeaderUnauth({ user, routeTo, state, logout, cart, isTop }) {
 
 
     const handleCartClick = (event) => {

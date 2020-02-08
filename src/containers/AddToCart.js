@@ -29,11 +29,20 @@ const AddToCartPage = observer(({ history }) => {
         history.push('/checkout');
     }
 
+    const handleRemoveCart = (ind) => {
+        console.log("handleRemoveCart: ", ind);
+        appCartStore.remove(ind)
+    }
+
     if (!cart) {
         return null
     }
 
-    return <AddToCartView data={cart} total={total} onCheckout={handleCheckoutClick} />
+    return <AddToCartView
+        data={cart} total={total}
+        onCheckout={handleCheckoutClick}
+        onRemove={handleRemoveCart}
+    />
 })
 
 export { AddToCartPage }

@@ -22,6 +22,11 @@ class AppCartStore {
         this.cart = [];
         this.total = 0;
     }
+    remove(ind) {
+        let cartProduct = this.cart[ind];
+        this.total -= (cartProduct.cartQty * cartProduct.product.price);
+        this.cart.splice(ind, 1);
+    }
 }
 
 AppCartStore = decorate(AppCartStore, {
@@ -29,6 +34,7 @@ AppCartStore = decorate(AppCartStore, {
     cart: observable,
     addCart: action,
     refreshCart: action,
+    remove: action,
 });
 
 export { AppCartStore };

@@ -10,6 +10,7 @@ import { HeaderUnauth } from '../components/HeaderUnauth';
 const Header = observer(({ history }) => {
 
     const [loggedin, setLoggedin] = useState(false)
+    const [user, setUser] = useState(undefined)
     const [isTop, setIsTop] = useState(true)
     const [cartsLength, setCartsLength] = useState(0)
     const rootStoreContext = useContext(RootStoreContext);
@@ -17,6 +18,7 @@ const Header = observer(({ history }) => {
 
     useEffect(() => {
         setLoggedin(userStore.isLoggedin)
+        setUser(userStore)
     }, [userStore.isLoggedin])
 
     useEffect(() => {
@@ -54,6 +56,7 @@ const Header = observer(({ history }) => {
 
     return (
         <HeaderUnauth
+            user={user}
             routeTo={handleRouteTo}
             state={loggedin}
             logout={doLogout}

@@ -1,8 +1,18 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faHeart, faSave, faSignal, faUserAlt, faDumpster, faBoxOpen, faPalette } from '@fortawesome/free-solid-svg-icons'
+import { faShoppingCart } from '@fortawesome/free-solid-svg-icons'
 
-function AddToCartView({ data, total, onCheckout }) {
+function AddToCartView({ data, total, onCheckout, onRemove }) {
+    if (!data || !data.length) {
+        return (
+            <div className="container account-container pt5">
+                <div className="text-center cart-empty">
+                    <FontAwesomeIcon icon={faShoppingCart} size='lg' color="#363636" />
+                    <div>Your cart is empty. Why not add some items?</div>
+                </div>
+            </div>
+        )
+    }
     return (
         <div className="container account-container pt5">
             <div className="row justify-content-center">
@@ -28,6 +38,7 @@ function AddToCartView({ data, total, onCheckout }) {
                                             <td>{cart.product.price} €</td>
                                             <td>{cart.cartQty}</td>
                                             <td>{cart.cartQty * cart.product.price} €</td>
+                                            <td><strong className="pointer" onClick={() => onRemove(ind)}>X</strong></td>
                                         </tr>
                                     )
                                 })
