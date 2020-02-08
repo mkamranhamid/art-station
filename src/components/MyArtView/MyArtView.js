@@ -4,9 +4,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrash, faPen } from '@fortawesome/free-solid-svg-icons'
 import { Link } from "react-router-dom";
 
-function MyArtView({ products, onActionChange }) {
+import { Popup } from "../Popup";
+
+function MyArtView({ products, onEdit, onRemove }) {
 
     const [selectedAction, setAction] = useState('Select Action');
+    const [ModalVisibility, setModalVisibility] = useState(false);
+    const [ModalData, setModalData] = useState(false);
     const actions = [
         { id: 0, icon: faPen, title: "Edit" },
         { id: 1, icon: faTrash, title: "Remove" },
@@ -15,8 +19,23 @@ function MyArtView({ products, onActionChange }) {
     if (!products.length) {
         return <h6>No Art found :( Add your art from account/<Link to="/account/add-art">Add Art</Link></h6>
     }
+    const handleAction = (title, product_id, ind) => {
+        if (title == 'Remove') {
+            console.log("REMOVE CALLED")
+            setModalData({ title, product_id, product_index: ind })
+            setModalVisibility(true);
+            return
+        }
+        onEdit(title, product_id)
+    }
+
+    const handleConfirmation = () => {
+        setModalVisibility(false);
+        onRemove(ModalData)
+    }
+
     return (
-        <div className="container pt5">
+        <div className="container">
             <div className="table-responsive">
                 <table className="table table-striped">
                     <thead>
@@ -34,7 +53,7 @@ function MyArtView({ products, onActionChange }) {
                                 <tr key={ind}>
                                     <th scope="row">{ind + 1}</th>
                                     <td>{product.title}</td>
-                                    <td>{product.price}</td>
+                                    <td>{product.price} €</td>
                                     <td>{product.publishedAt}</td>
                                     <td>
                                         <Dropdown>
@@ -48,7 +67,7 @@ function MyArtView({ products, onActionChange }) {
                                                             key={act.id}
                                                             href={false}
                                                             eventKey={act.id}
-                                                            onSelect={(eKey) => onActionChange(act.title, product.id)}>
+                                                            onSelect={() => handleAction(act.title, product.id, ind)}>
                                                             <FontAwesomeIcon icon={act.icon} />
                                                             <span className="ml-2">{act.title}</span>
                                                         </Dropdown.Item>
@@ -63,6 +82,13 @@ function MyArtView({ products, onActionChange }) {
                     </tbody>
                 </table>
             </div>
+            <Popup
+                open={ModalVisibility}
+                onClose={() => setModalVisibility(false)}
+                onConfirm={handleConfirmation}
+            >
+                Are you sure you want to remove this product?
+            </Popup>
         </div>
     )
 }

@@ -72,9 +72,9 @@ export async function fetchAllActiveProductsByQuery(q) {
     try {
         const productRef = firestore.collection(`products`);
         const productSnapshot = await productRef.where('status', '==', 'active')
-                                                .where('title', 'array-contains', q)
-                                                .orderBy('title')
-                                                .get();
+            .where('title', 'array-contains', q)
+            .orderBy('title')
+            .get();
         let products = []
         productSnapshot.forEach(doc => {
             products.push({ ...doc.data(), id: doc.id });
@@ -275,6 +275,16 @@ export async function fetchCartsByOrderId(oid) {
             carts.push({ ...doc.data(), id: doc.id });
         }); */
         return carts;
+    } catch (err) {
+        throw err;
+    }
+}
+
+export async function removeProductById(id) {
+    try {
+        const productRef = firestore.collection(`products`);
+        const productDocument = await productRef.doc(id).delete();
+        return true;
     } catch (err) {
         throw err;
     }
