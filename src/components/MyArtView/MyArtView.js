@@ -10,7 +10,7 @@ function MyArtView({ products, onEdit, onRemove }) {
 
     const [selectedAction, setAction] = useState('Select Action');
     const [ModalVisibility, setModalVisibility] = useState(false);
-    const [ModalData, setModalData] = useState(false);
+    const [ModalData, setModalData] = useState(null);
     const actions = [
         { id: 0, icon: faPen, title: "Edit" },
         { id: 1, icon: faTrash, title: "Remove" },

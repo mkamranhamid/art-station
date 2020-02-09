@@ -11,7 +11,9 @@ export async function uploadArt(artData, uid) {
             ...artData,
             image: url,
             publishedAt: getPublishedDate(),
-            uid
+            uid,
+            rating: 0,
+            numberOfReviews: 0,
         }
         await addProduct(productDetails)
         return url;
@@ -211,6 +213,7 @@ export async function placeOrder(address, uid, carts, total) {
     carts.map(async (cart) => {
         updateProductById(cart.product.id, { quantity: 0 })
         return await createCart({
+            review: false,
             orderId: createdOrder.id,
             productId: cart.product.id,
             productUUID: cart.product.productUUID,
@@ -228,10 +231,14 @@ export async function placeOrder(address, uid, carts, total) {
 
 function updateProductById(productId, payload) {
     let productRef = firestore.collection('products').doc(productId);
-
     // update the product document fields
-    let updateSingle = productRef.update(payload);
+    productRef.update(payload);
+}
 
+function updateCardById(cartId, payload) {
+    let cartRef = firestore.collection('carts').doc(cartId);
+    // update the cart document fields
+    cartRef.update(payload);
 }
 
 async function createOrder(address, uid, total, publishedAt) {
@@ -285,6 +292,19 @@ export async function removeProductById(id) {
         const productRef = firestore.collection(`products`);
         const productDocument = await productRef.doc(id).delete();
         return true;
+    } catch (err) {
+        throw err;
+    }
+}
+export async function addProductReview(reviewObj, product, cartId) {
+    try {
+        let review = await firestore.collection(`reviews`).add(reviewObj);
+        let productRatingPrev = product.rating * product.numberOfReviews;
+        let numberOfReviews = product.numberOfReviews + 1;
+        let rating = (reviewObj.rating + productRatingPrev) / numberOfReviews;
+        updateProductById(reviewObj.productId, { rating, numberOfReviews })
+        updateCardById(cartId, { review: true })
+        return product;
     } catch (err) {
         throw err;
     }

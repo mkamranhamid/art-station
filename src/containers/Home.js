@@ -8,6 +8,7 @@ import { fetchAllActiveProducts, fetchAllActiveProductsByQuery } from '../utils/
 import { getToken, removeToken } from '../utils/common';
 
 import { Thumbnail } from '../components/Thumbnail';
+import { Rating } from "../components/Rating";
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch } from '@fortawesome/free-solid-svg-icons'

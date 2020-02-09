@@ -3,7 +3,7 @@ import { observer } from 'mobx-react-lite';
 
 import { RootStoreContext } from '../stores/rootStore';
 import { getUser } from '../utils/auth';
-import { fetchCartsByOrderId } from '../utils/crud';
+import { fetchCartsByOrderId, addProductReview } from '../utils/crud';
 
 import { OrderDetailView } from "../components/OrderDetailView";
 import { Loader } from "../components/Loader";
@@ -35,9 +35,30 @@ const OrderDetailPage = observer(({ history, match }) => {
         }
     }, [])
 
+    const handleReview = async ({ modalResponse, cart, cartIndex }) => {
+        try {
+            console.log("handleReview: ")
+            let reviewPayload = {
+                ...modalResponse,  // description, rating
+                orderId: cart.orderId,
+                productId: cart.productId,
+                uid: userStore.user.uid
+            }
+            await addProductReview(reviewPayload, cart.product, cart.id)
+            let newCarts = [...carts];
+            newCarts[cartIndex].review = true;
+            setCarts(newCarts)
+        } catch (err) {
+            console.log(err)
+        }
+    }
+
     return (
         <div className="w-100 d-flex justify-content-center pt5">
-            {carts && <OrderDetailView carts={carts} />}
+            {carts && <OrderDetailView
+                carts={carts}
+                onReview={handleReview}
+            />}
             {
                 loading && <Loader type="large" />
             }

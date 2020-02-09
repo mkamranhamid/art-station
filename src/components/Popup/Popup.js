@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Modal, Button } from 'react-bootstrap';
 
-export const Popup = ({ open, onClose, children, title, onConfirm }) => {
+export const Popup = ({ open, onClose, children, title, onConfirm, confirmedDisabled }) => {
 
     return (
         <Modal show={open} onHide={onClose}>
@@ -17,7 +17,7 @@ export const Popup = ({ open, onClose, children, title, onConfirm }) => {
                 <Button variant="secondary" onClick={onClose}>
                     No
                 </Button>
-                <Button variant="" className="btn-mkh" onClick={onConfirm}>
+                <Button disabled={confirmedDisabled} variant="" className="btn-mkh" onClick={onConfirm}>
                     Yes
                 </Button>
             </Modal.Footer>
