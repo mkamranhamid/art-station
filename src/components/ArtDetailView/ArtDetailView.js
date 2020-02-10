@@ -1,5 +1,6 @@
 import React from "react";
 import { Rating } from "../Rating";
+import { ShowMore } from "../ShowMore";
 
 export const ArtDetailView = ({ product, onCartAdd }) => {
 
@@ -18,7 +19,7 @@ export const ArtDetailView = ({ product, onCartAdd }) => {
             <div className="row mt-5">
                 <div className="col-md-9 col-sm-12 p-0">
                     <h3>About</h3>
-                    <p>{product.description}</p>
+                    <ShowMore>{product.description}</ShowMore>
                 </div>
                 <div className="col-md-3 col-sm-12">
                     <div className="ml-2">
