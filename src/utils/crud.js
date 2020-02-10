@@ -301,7 +301,7 @@ export async function addProductReview(reviewObj, product, cartId) {
         let review = await firestore.collection(`reviews`).add(reviewObj);
         let productRatingPrev = product.rating * product.numberOfReviews;
         let numberOfReviews = product.numberOfReviews + 1;
-        let rating = (reviewObj.rating + productRatingPrev) / numberOfReviews;
+        let rating = Math.floor((reviewObj.rating + productRatingPrev) / numberOfReviews);
         updateProductById(reviewObj.productId, { rating, numberOfReviews })
         updateCardById(cartId, { review: true })
         return product;

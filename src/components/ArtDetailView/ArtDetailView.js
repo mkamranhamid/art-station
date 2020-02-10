@@ -1,10 +1,11 @@
 import React from "react";
+import { Rating } from "../Rating";
 
 export const ArtDetailView = ({ product, onCartAdd }) => {
 
 
     return (
-        <div className="container pt5">
+        <div className="container">
             <div className="row">
                 <div className="col-md-12 col-sm-12 text-center">
                     <p>{product.publishedAt}</p>
@@ -35,6 +36,13 @@ export const ArtDetailView = ({ product, onCartAdd }) => {
                     <div className="m-2">
                         <h5>Curator</h5>
                         <p>{product.user.name}</p>
+                    </div>
+                    <div className="m-2">
+                        <h5>Rating</h5>
+                        <Rating
+                            readonly
+                            rating={product.rating}
+                        />
                     </div>
                     <div className="m-2">
                         {product.quantity > 0 && <button className="btn btn-outline-mkh" onClick={() => onCartAdd(product)}>Add to Cart</button>}

@@ -51,7 +51,7 @@ export const ArtDetailPage = observer(({ history, match }) => {
     }
 
     return (
-        <div className="w-100 d-flex justify-content-center">
+        <div className="w-100 d-flex justify-content-center pt-5">
             {product && <ArtDetailView product={product} onCartAdd={handleAddToCard} />}
             {
                 loading && <Loader type="large" />
