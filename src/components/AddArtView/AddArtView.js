@@ -20,6 +20,7 @@ function AddArtView({ onSubmit, error, loading, product }) {
         if (product) {
             setHeading('Update')
             setTitle(product.title)
+            setImgSrc(product.image)
             setPrice(product.price)
             setQuantity(product.quantity || 1)
             setDescription(product.description || '')
@@ -29,6 +30,7 @@ function AddArtView({ onSubmit, error, loading, product }) {
 
     let fileInput = React.createRef();
     const [title, setTitle] = useState('');
+    const [imgSrc, setImgSrc] = useState(null);
     const [description, setDescription] = useState('');
     const [price, setPrice] = useState(1);
     const [quantity, setQuantity] = useState(1);
@@ -45,6 +47,10 @@ function AddArtView({ onSubmit, error, loading, product }) {
         }
         // const file = fileInput.current.files[0]
         onSubmit({ title, description, file, price, quantity, category: selectedCategory, status: 'active' });
+    }
+
+    const handleChangeInput = ({ target }) => {
+        setImgSrc(URL.createObjectURL(target.files[0]))
     }
 
     return (
@@ -91,6 +97,7 @@ function AddArtView({ onSubmit, error, loading, product }) {
                             onChange={({ target }) => setPrice(target.value)}
                         />
                     </div>
+                    <input type="file" placeholder="Write something" onChange={handleChangeInput} />
                     {/* <div className="form-group">
                         <label htmlFor="addart-price">Quantity</label>
                         <input
@@ -131,9 +138,13 @@ function AddArtView({ onSubmit, error, loading, product }) {
                             <span>Choose File</span>
                             <input
                                 ref={fileInput}
+                                onChange={handleChangeInput}
                                 type="file"
                                 accept="image/x-png,image/gif,image/jpeg"
                             />
+                        </div>
+                        <div className="thumbnail-img">
+                            <img className="img-thumbnail" src={imgSrc} alt={title} />
                         </div>
                     </div>
                     {error && (<div className="alert alert-danger" role="alert">
