@@ -3,7 +3,7 @@ import { observer } from 'mobx-react-lite';
 
 import { RootStoreContext } from '../stores/rootStore';
 import { getUser } from '../utils/auth';
-import { fetchProductDetailById } from '../utils/crud';
+import { fetchProductDetailById, fetchProductReviews } from '../utils/crud';
 
 import { ArtDetailView } from "../components/ArtDetailView";
 import { Loader } from "../components/Loader";
@@ -13,6 +13,7 @@ export const ArtDetailPage = observer(({ history, match }) => {
     const [error, setError] = useState(null);
     const [loading, setLoader] = useState(true);
     const [product, setProduct] = useState(null)
+    const [reviews, setReviews] = useState(null)
     const rootStoreContext = useContext(RootStoreContext);
     const { userStore, appCartStore } = rootStoreContext;
 
@@ -35,6 +36,21 @@ export const ArtDetailPage = observer(({ history, match }) => {
         }
     }, [])
 
+    useEffect(() => {
+        let { id } = match.params;
+        const productReviewsFetch = async (id) => {
+            try {
+                const fetched_reviews = await fetchProductReviews(id)
+                setReviews(fetched_reviews)
+                setLoader(false)
+            } catch (err) {
+                console.log(err)
+                setLoader(false)
+            }
+        }
+        productReviewsFetch(id)
+    }, [])
+
     const handleAddToCard = ({ image, price, title, id, uid }) => {
         let cartPayload = {
             cartQty: 1,
@@ -52,7 +68,11 @@ export const ArtDetailPage = observer(({ history, match }) => {
 
     return (
         <div className="w-100 d-flex justify-content-center pt-5">
-            {product && <ArtDetailView product={product} onCartAdd={handleAddToCard} />}
+            {product && <ArtDetailView
+                product={product}
+                onCartAdd={handleAddToCard}
+                reviews={reviews}
+            />}
             {
                 loading && <Loader type="large" />
             }

@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { Dropdown } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTrash, faPen } from '@fortawesome/free-solid-svg-icons'
+import { faTrash, faPen, faPrint } from '@fortawesome/free-solid-svg-icons'
 import { Link } from "react-router-dom";
 
 import { Popup } from "../Popup";
 
-function MyArtView({ products, onEdit, onRemove }) {
+function MyArtView({ products, onEdit, onRemove, onShowReviews }) {
 
     const [selectedAction, setAction] = useState('Select Action');
     const [ModalVisibility, setModalVisibility] = useState(false);
@@ -14,6 +14,7 @@ function MyArtView({ products, onEdit, onRemove }) {
     const actions = [
         { id: 0, icon: faPen, title: "Edit" },
         { id: 1, icon: faTrash, title: "Remove" },
+        { id: 2, icon: faPrint, title: "Show Reviews" },
     ]
 
     if (!products.length) {
@@ -25,8 +26,11 @@ function MyArtView({ products, onEdit, onRemove }) {
             setModalData({ title, product_id, product_index: ind })
             setModalVisibility(true);
             return
+        } else if (title == 'Edit') {
+            onEdit(title, product_id)
+        } else {
+            onShowReviews(title, product_id)
         }
-        onEdit(title, product_id)
     }
 
     const handleConfirmation = () => {

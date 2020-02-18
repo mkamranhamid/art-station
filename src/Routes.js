@@ -19,6 +19,7 @@ import { OrderHistoryPage } from './containers/OrderHistory';
 import { OrderDetailPage } from './containers/OrderDetail';
 import { UsersPage } from './containers/Users';
 import { ProductsPage } from './containers/Products';
+import { ReviewList } from './containers/ReviewList';
 
 function Routes() {
   return (
@@ -49,6 +50,7 @@ function PrivateRoute() {
       <Route exact path="/account/orders/:id" component={OrderDetailPage} />
       <Route path="/account/users" component={UsersPage} />
       <Route path="/account/products" component={ProductsPage} />
+      <Route path="/account/reviews/:id" component={ReviewList} />
     </>
   );
 }

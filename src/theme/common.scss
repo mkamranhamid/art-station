@@ -160,18 +160,18 @@ p, h1 {
     display: flex;
     align-items: center;
     text-align: center;
-    color: #818078;
+    color: #e5e5e5;
     cursor: pointer;
     &:before {
         content: '';
         flex: 1;
-        border-bottom: 1px solid #818078;
+        border-bottom: 1px solid #e5e5e5;
         margin-right: .25em;
     }
     &:after {
         content: '';
         flex: 1;
-        border-bottom: 1px solid #818078;
+        border-bottom: 1px solid #e5e5e5;
         margin-left: .25em;
     }
 }

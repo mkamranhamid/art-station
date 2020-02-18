@@ -47,6 +47,10 @@ const MyArtPage = observer(({ history }) => {
     const handleEditAction = (act, prodId) => {
         history.push(`/account/edit-art/${prodId}`);
     }
+
+    const handleShowReviewList = (act, prodId) => {
+        history.push(`/account/reviews/${prodId}`);
+    }
     const handlenRemove = async (modalData) => {
         console.log(modalData);
         try {
@@ -68,7 +72,12 @@ const MyArtPage = observer(({ history }) => {
     }
     return (
         <div className="w-100 d-flex justify-content-center pt5">
-            {products && <MyArtView products={products} onEdit={handleEditAction} onRemove={handlenRemove} />}
+            {products && <MyArtView
+                products={products}
+                onEdit={handleEditAction}
+                onRemove={handlenRemove}
+                onShowReviews={handleShowReviewList}
+            />}
         </div>
     )
 })

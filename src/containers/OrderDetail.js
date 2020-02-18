@@ -4,6 +4,7 @@ import { observer } from 'mobx-react-lite';
 import { RootStoreContext } from '../stores/rootStore';
 import { getUser } from '../utils/auth';
 import { fetchCartsByOrderId, addProductReview } from '../utils/crud';
+import { getPublishedDate } from '../utils/common';
 
 import { OrderDetailView } from "../components/OrderDetailView";
 import { Loader } from "../components/Loader";
@@ -42,7 +43,8 @@ const OrderDetailPage = observer(({ history, match }) => {
                 ...modalResponse,  // description, rating
                 orderId: cart.orderId,
                 productId: cart.productId,
-                uid: userStore.user.uid
+                uid: userStore.user.uid,
+                publishedAt: getPublishedDate(),
             }
             await addProductReview(reviewPayload, cart.product, cart.id)
             let newCarts = [...carts];

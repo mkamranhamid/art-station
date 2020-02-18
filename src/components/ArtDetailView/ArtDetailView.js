@@ -2,8 +2,7 @@ import React from "react";
 import { Rating } from "../Rating";
 import { ShowMore } from "../ShowMore";
 
-export const ArtDetailView = ({ product, onCartAdd }) => {
-
+export const ArtDetailView = ({ product, onCartAdd, reviews }) => {
 
     return (
         <div className="container">
@@ -20,6 +19,11 @@ export const ArtDetailView = ({ product, onCartAdd }) => {
                 <div className="col-md-9 col-sm-12 p-0">
                     <h3>About</h3>
                     <ShowMore>{product.description}</ShowMore>
+                    <div>
+                        {
+                            <ReviewGroup reviews={reviews} />
+                        }
+                    </div>
                 </div>
                 <div className="col-md-3 col-sm-12">
                     <div className="ml-2">
@@ -51,6 +55,22 @@ export const ArtDetailView = ({ product, onCartAdd }) => {
                     </div>
                 </div>
             </div>
+        </div>
+    )
+}
+
+const ReviewGroup = ({ reviews }) => {
+    if (!reviews || !reviews.length) {
+        return <p>This art has not been reviewed yet.</p>
+    }
+    return reviews.map((review, ind) =>
+        <div key={ind} className="review">
+            <strong>{review.user.username}</strong>
+            <p>{review.description}</p>
+            <Rating
+                readonly
+                rating={review.rating}
+            />
         </div>
     )
 }

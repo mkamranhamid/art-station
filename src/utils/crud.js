@@ -1,6 +1,7 @@
 import { auth, database, firestore } from "../config/firebase"
 import { uploadFile } from "./storage";
 import { getPublishedDate } from "./common";
+import { getUser } from "./auth";
 
 export async function uploadArt(artData, uid) {
     try {
@@ -308,4 +309,23 @@ export async function addProductReview(reviewObj, product, cartId) {
     } catch (err) {
         throw err;
     }
+}
+export async function fetchProductReviews(productId) {
+    try {
+        const reviewsRef = firestore.collection(`reviews`);
+        const reviewsSnapshot = await reviewsRef.where('productId', '==', productId).get();
+        let reviews = await fetchAllReviewUser(reviewsSnapshot)
+        return reviews;
+    } catch (err) {
+        throw err;
+    }
+}
+
+async function fetchAllReviewUser(reviewsSnapshot) {
+    let users = reviewsSnapshot.docs.map(async (doc) => await getUser(doc.data().uid))
+    let allUsers = await Promise.all(users)
+    let reviewUser = reviewsSnapshot.docs.map((doc, ind) => {
+        return { ...doc.data(), id: doc.id, user: allUsers[ind] }
+    })
+    return reviewUser;
 }
